@@ -158,20 +158,20 @@ For this documentation, the node will be a permanent type and the name will be `
   
 After this click on `Create` which will display the configuration page of the node.  
 
-1. Write the description of the node as desired.
-2. Number of executors means number of threads running at a time (it will be better to set it to the number of processors present on the machine which is running this node).
-3. Remote root directory will be the directory where the jobs will run by default on the node. In our case this will be a specified directory inside the container.
-4. Labels indicate that this node will run only when a job with specified labels is run, otherwise this node will not be used (also depends on the usage method in the next option). If the purpose is to use the node by default for every job, then leave it empty.
-5. Select a desired usage option.
-6. In launch methods, select “Launch agents via SSH”
-    - In “Host” enter the ip address of the container which is 10.0.3.127 in our case.
-    - In “Credentials”, click Add and this will open another sub dialog for entering credentials information.
-    - Select the kind as “Username wih password”.
-    - Leave other options as is and write the username and password of the container user, in our case the username will be user1 and password will be the password which was set for user1.
-    - “ID” and “Description” are optional.
-    - Click on “Add”
-    - Now as the credentials are added, click on the dropdown menu and select the username you just added. In our case it is user1 as the username added was user1
-7. After this rest of the options need not to be changed if this node is going to be a default node.
+1. Write the description of the node as desired.  
+2. Number of executors means number of threads running at a time (it will be better to set it to the number of processors present on the machine which is running this node).  
+3. Remote root directory will be the directory where the jobs will run by default on the node. In our case this will be a specified directory inside the container.  
+4. Labels indicate that this node will run only when a job with specified labels is run, otherwise this node will not be used (also depends on the usage method in the next option). If the purpose is to use the node by default for every job, then leave it empty.  
+5. Select a desired usage option.  
+6. In launch methods, select “Launch agents via SSH”  
+    - In “Host” enter the ip address of the container which is 10.0.3.127 in our case.  
+    - In “Credentials”, click Add and this will open another sub dialog for entering credentials information.  
+    - Select the kind as “Username wih password”.  
+    - Leave other options as is and write the username and password of the container user, in our case the username will be user1 and password will be the password which was set for user1.  
+    - “ID” and “Description” are optional.  
+    - Click on “Add”.  
+    - Now as the credentials are added, click on the dropdown menu and select the username you just added. In our case it is user1 as the username added was user1.  
+7. After this rest of the options need not to be changed if this node is going to be a default node.  
 8. Click on “Save”.  
 After complete setup, the configuration for this node will look something like this.  
 

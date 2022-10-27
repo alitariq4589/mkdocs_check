@@ -11,6 +11,10 @@ nav:
     - Github PR webhook integration: jenkins_github_integration/Github_PR_webhook_integration.md
 - QEMU and Linux Kernel:
     - Building Linux kernel and booting on QEMU: Building_Linux_Kernel.md
+- Cross-Compilation:
+    - Overview: Cross_Compiling/Overview.md
+    - Cross Compiling Openssl: Cross_Compiling/Cross_compiling_openssl.md
+    - Cross Compiling Ruby: Cross_Compiling/Cross_compiling_ruby.md
 - RISC-V CI User's Guide:
     - Guide for Software Developer: Software_Developer_Guide.md
 theme: readthedocs

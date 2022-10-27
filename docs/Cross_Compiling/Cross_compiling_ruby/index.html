@@ -144,57 +144,53 @@
 <p>Before cross-compiling, one must install ruby from source on the native machine which will solve the error described in <code>Pre-requisites</code> section above.  </p>
 <ul>
 <li>(<em>THIS STEP IS STRONGLY RECOMMENDED !</em>)In the source directory, create a folder with any name in which <code>Makefile</code> will be generated otherwise there will be a lot of files made in the source directory (possibly create copy of repo directory).  </li>
-<li>
-<p>In the source directory of ruby run following command to generate <code>configure</code> file.  </p>
-<p><code>shell
-./autogen.sh</code>  </p>
-</li>
-<li>
-<p>After this, run the following <code>configure</code> command to generate <code>Makefile</code>.  </p>
-<p><code>shell
-../configure --prefix=$PREFIX #$PREFIX is where you want to install binary files at the end, so replace it.</code></p>
-</li>
-<li>
-<p>After the above command is completed, run following command to start the build  </p>
-<p><code>shell
-make -j$(nproc) #-j$(nproc) uses parallelism for make</code>  </p>
-</li>
-<li>
-<p>After the above command is complete, run following command to install the binaries on the specified path mentioned in <code>--prefix</code> above  </p>
-<p><code>shell
-make install</code></p>
-</li>
-<li>
-<p>Now ruby should be available in the <code>$PREFIX</code> path (also in the <code>.bashrc</code>). Add $PREFIX path to $PATH variable and uninstall the the ruby installed using <code>apt</code> otherwise, the source will keep using that one for building and the error will persist.  </p>
-<p><code>shell
-sudo apt purge ruby</code>  </p>
-</li>
+<li>In the source directory of ruby run following command to generate <code>configure</code> file.  </li>
 </ul>
+<pre><code class="language-shell">./autogen.sh
+</code></pre>
+<ul>
+<li>After this, run the following <code>configure</code> command to generate <code>Makefile</code>.  </li>
+</ul>
+<pre><code class="language-shell">../configure --prefix=$PREFIX #$PREFIX is where you want to install binary files at the end, so replace it.
+</code></pre>
+<ul>
+<li>After the above command is completed, run following command to start the build  </li>
+</ul>
+<pre><code class="language-shell">make -j$(nproc) #-j$(nproc) uses parallelism for make
+</code></pre>
+<ul>
+<li>After the above command is complete, run following command to install the binaries on the specified path mentioned in <code>--prefix</code> above  </li>
+</ul>
+<pre><code class="language-shell">make install
+</code></pre>
+<ul>
+<li>Now ruby should be available in the <code>$PREFIX</code> path (also in the <code>.bashrc</code>). Add $PREFIX path to $PATH variable and uninstall the the ruby installed using <code>apt</code> otherwise, the source will keep using that one for building and the error will persist.  </li>
+</ul>
+<pre><code class="language-shell">sudo apt purge ruby
+</code></pre>
 <h3 id="cross-compiling-ruby-for-riscv64-unknown-linux-gnu">Cross-Compiling Ruby for <code>riscv64-unknown-linux-gnu</code></h3>
 <ul>
-<li>
-<p>After the ruby installed using <code>apt</code> is uninstalled from the system, clean the working directory with following command.  </p>
-<p><code>shell
-make clean</code></p>
-</li>
-<li>
-<p>After cleaning the working directory, generate the <code>Makefile</code> again for cross-compiling ruby for <code>riscv64-unknown-linux-gnu</code> target and host using the command below  </p>
-<p><code>shell
-../../configure --prefix=$PREFIX --build=x86_64-linux-gnu --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu</code></p>
-</li>
-<li>
-<p>After the above command is successful, start build with following command  </p>
-<p><code>shell
-make -j(nproc)</code>  </p>
-</li>
-<li>
-<p>Install the binaries in path mentioned with <code>--prefix</code> above with following command  </p>
-<p><code>shell
-make install</code></p>
-</li>
-<li>
-<p>After this process, ruby will be installed inside <code>$PREFIX/</code> directory.  </p>
-</li>
+<li>After the ruby installed using <code>apt</code> is uninstalled from the system, clean the working directory with following command.  </li>
+</ul>
+<pre><code class="language-shell">make clean
+</code></pre>
+<ul>
+<li>After cleaning the working directory, generate the <code>Makefile</code> again for cross-compiling ruby for <code>riscv64-unknown-linux-gnu</code> target and host using the command below  </li>
+</ul>
+<pre><code class="language-shell">../../configure --prefix=$PREFIX --build=x86_64-linux-gnu --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu
+</code></pre>
+<ul>
+<li>After the above command is successful, start build with following command  </li>
+</ul>
+<pre><code class="language-shell">make -j(nproc)
+</code></pre>
+<ul>
+<li>Install the binaries in path mentioned with <code>--prefix</code> above with following command  </li>
+</ul>
+<pre><code class="language-shell">make install
+</code></pre>
+<ul>
+<li>After this process, ruby will be installed inside <code>$PREFIX/</code> directory.  </li>
 </ul>
 <p><strong>Note:</strong> Currently, this process (as checked on version 3.1.2) installs ruby without extensions shown in the following image  </p>
 <p><img alt="ruby_extensions" src="../../doc_images/ruby_extensions.png" /></p>

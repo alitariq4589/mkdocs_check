@@ -43,59 +43,59 @@ Before cross-compiling, one must install ruby from source on the native machine 
 - (*THIS STEP IS STRONGLY RECOMMENDED !*)In the source directory, create a folder with any name in which `Makefile` will be generated otherwise there will be a lot of files made in the source directory (possibly create copy of repo directory).  
 - In the source directory of ruby run following command to generate `configure` file.  
 
-    ```shell
-    ./autogen.sh
-    ```  
+```shell
+./autogen.sh
+```  
 
 - After this, run the following `configure` command to generate `Makefile`.  
 
-    ```shell
-    ../configure --prefix=$PREFIX #$PREFIX is where you want to install binary files at the end, so replace it.
-    ```
+```shell
+../configure --prefix=$PREFIX #$PREFIX is where you want to install binary files at the end, so replace it.
+```
 
 - After the above command is completed, run following command to start the build  
 
-    ```shell
-    make -j$(nproc) #-j$(nproc) uses parallelism for make
-    ```  
+```shell
+make -j$(nproc) #-j$(nproc) uses parallelism for make
+```  
 
 - After the above command is complete, run following command to install the binaries on the specified path mentioned in `--prefix` above  
 
-    ```shell
-    make install
-    ```
+```shell
+make install
+```
 
 - Now ruby should be available in the `$PREFIX` path (also in the `.bashrc`). Add $PREFIX path to $PATH variable and uninstall the the ruby installed using `apt` otherwise, the source will keep using that one for building and the error will persist.  
 
-    ```shell
-    sudo apt purge ruby
-    ```  
+```shell
+sudo apt purge ruby
+```  
 
 ### Cross-Compiling Ruby for `riscv64-unknown-linux-gnu`
 
 - After the ruby installed using `apt` is uninstalled from the system, clean the working directory with following command.  
 
-    ```shell
-    make clean
-    ```
+```shell
+make clean
+```
 
 - After cleaning the working directory, generate the `Makefile` again for cross-compiling ruby for `riscv64-unknown-linux-gnu` target and host using the command below  
 
-    ```shell
-    ../../configure --prefix=$PREFIX --build=x86_64-linux-gnu --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu
-    ```
+```shell
+../../configure --prefix=$PREFIX --build=x86_64-linux-gnu --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu
+```
 
 - After the above command is successful, start build with following command  
 
-    ```shell
-    make -j(nproc)
-    ```  
+```shell
+make -j(nproc)
+```  
 
 - Install the binaries in path mentioned with `--prefix` above with following command  
 
-    ```shell
-    make install
-    ```
+```shell
+make install
+```
 
 - After this process, ruby will be installed inside `$PREFIX/` directory.  
 

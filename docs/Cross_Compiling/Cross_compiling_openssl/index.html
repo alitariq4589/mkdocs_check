@@ -116,28 +116,26 @@
 <h2 id="building-openssl-for-riscv64-architecture">Building openssl for <code>riscv64</code> architecture</h2>
 <p>Following are the steps used to build openssl for riscv64 architecture.  </p>
 <ol>
-<li>
-<p>Get the source code of <code>openssl</code> and navigate inside the cloned repository using the commands below</p>
-<p><code>shell
-git clone https://github.com/openssl/openssl.git
-cd openssl</code></p>
-</li>
-<li>
-<p>Configure openssl for building. In openssl there are some <code>os/compiler</code> choices which one can use to build for his architecture. But in our case there is no support for building with riscv64. As it is written in C language, so it can be compiled whether or not the support is given. Use the following command to generate a <code>Makefile</code> for <code>linux-generic64</code></p>
-<p><code>shell
-./Configure linux-generic64 --prefix=$PREFIX # Prefix is the directory where you want binaries to be installed at the end</code></p>
-</li>
-<li>
-<p>After the above command is successfully completed, run the following command to build openssl using <code>riscv64-unknown-linux-gnu-gcc</code> compiler instead of native gcc compiler.</p>
-<p><code>shell
-make -j$(nproc) CC=riscv64-unknown-linux-gnu-gcc</code></p>
-</li>
-<li>
-<p>Install the binaries in the specified <code>--prefix</code> using the command below</p>
-<p><code>shell
-make -j$(nproc) install CC=riscv64-unknown-linux-gnu-gcc</code></p>
-</li>
+<li>Get the source code of <code>openssl</code> and navigate inside the cloned repository using the commands below</li>
 </ol>
+<pre><code class="language-shell">git clone https://github.com/openssl/openssl.git
+cd openssl
+</code></pre>
+<ol>
+<li>Configure openssl for building. In openssl there are some <code>os/compiler</code> choices which one can use to build for his architecture. But in our case there is no support for building with riscv64. As it is written in C language, so it can be compiled whether or not the support is given. Use the following command to generate a <code>Makefile</code> for <code>linux-generic64</code></li>
+</ol>
+<pre><code class="language-shell">./Configure linux-generic64 --prefix=$PREFIX # Prefix is the directory where you want binaries to be installed at the end
+</code></pre>
+<ol>
+<li>After the above command is successfully completed, run the following command to build openssl using <code>riscv64-unknown-linux-gnu-gcc</code> compiler instead of native gcc compiler.</li>
+</ol>
+<pre><code class="language-shell">make -j$(nproc) CC=riscv64-unknown-linux-gnu-gcc
+</code></pre>
+<ol>
+<li>Install the binaries in the specified <code>--prefix</code> using the command below</li>
+</ol>
+<pre><code class="language-shell">make -j$(nproc) install CC=riscv64-unknown-linux-gnu-gcc
+</code></pre>
 <p>The installed binary can be tested on <code>qemu-riscv64</code> using the command below:</p>
 <pre><code class="language-shell">qemu-riscv64 -L $RISCV_SYSROOT ./openssl
 </code></pre>

@@ -16,6 +16,8 @@ nav:
     - Installing qemu-riscv64: Cross_Compiling/Installing_qemu-riscv64.md
     - Cross Compiling Openssl: Cross_Compiling/Cross_compiling_openssl.md
     - Cross Compiling Ruby: Cross_Compiling/Cross_compiling_ruby.md
+    - Cross Compiling Drhystone: Cross_Compiling/Cross_compiling_dhrystone.md
+    - Cross Compiling Coremark: Cross_Compiling/Cross_compiling_coremark
 - RISC-V CI User's Guide:
     - Guide for Software Developer: Software_Developer_Guide.md
 theme: readthedocs

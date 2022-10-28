@@ -13,6 +13,7 @@ nav:
     - Building Linux kernel and booting on QEMU: Building_Linux_Kernel.md
 - Cross-Compilation:
     - Overview: Cross_Compiling/Overview.md
+    - Installing qemu-riscv64: Cross_Compiling/Installing_qemu-riscv64.md
     - Cross Compiling Openssl: Cross_Compiling/Cross_compiling_openssl.md
     - Cross Compiling Ruby: Cross_Compiling/Cross_compiling_ruby.md
 - RISC-V CI User's Guide:

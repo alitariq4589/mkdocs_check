@@ -11,20 +11,22 @@ Execute the following command to install the pre-requisites for installing `qemu
 
 ```shell
 sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
-```
+```  
 
 `qemu-slirp` is important for enabling user-level networking with `qemu-system-riscv64` `qemu-system-riscv64` while loading image of server installation of ubuntu. So it needs to be installed first.  
 
 Get the source code of `qemu-slirp` using following command:  
 
-```
+```shell
 git clone https://github.com/openSUSE/qemu-slirp.git
-```
+```  
 
 Then Execute following commands to install `slirp` in meson, which can later be used by qemu during build.  
 
-        meson build
-        ninja -C build install
+```shell
+meson build
+ninja -C build install
+```  
 
 **Note:** Make sure you have `riscv64-unknown-linux-gnu` toolchain installed for compiling program and executing them on qemu later.
 
@@ -38,29 +40,41 @@ There are some optional dependencies which one can download, but they are actual
 
 ### Installing `qemu-system-riscv64` on ubuntu
 
-1. Get source code of `qemu` from github using the command below  
+- Get source code of `qemu` from github using the command below  
 
-        git clone https://github.com/qemu/qemu.git
+```shell
+git clone https://github.com/qemu/qemu.git
+```  
 
-2. Configure qemu for `riscv64-softmmu` with following command (replace $PREFIX with valid location of installation).  
+- Configure qemu for `riscv64-softmmu` with following command (replace $PREFIX with valid location of installation).  
 
-        ./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp  
+```shell
+./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp  
+```
 
-3. Execute following command to start the build.  
+- Execute following command to start the build.  
 
-        make  
+```shell
+make
+```
 
-4. Execute following command to install the binaries at `$PREFIX` location.  
+- Execute following command to install the binaries at `$PREFIX` location.  
 
-        make install
+```shell
+make install
+```  
 
-_**Note:** After the installation with `slirp` following error can be encountered on some systems_  
+_**Note:** After the installation with `slirp` following error can be encountered on some systems_.  
 
-    qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0  
+```shell
+qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0
+```
 
-_**Solution:** This can be solved by executing following command in source directory of qemu (which is cloned from github)_  
+_**Solution:** This can be solved by executing following command in source directory of qemu (which is cloned from github)._  
 
-        [sudo] ldconfig  
+```shell
+[sudo] ldconfig
+```
 
 ### Testing `qemu-system-riscv64`  
 
@@ -75,50 +89,65 @@ Throughout cross-compiling section, `qemu-riscv64` will be used with `linux-user
 
 ### Installing `qemu-riscv64` on ubuntu 22.04
 
-1. Get source code of `qemu` using the command below  
+- Get source code of `qemu` using the command below  
 
 ```shell
 git clone https://github.com/qemu/qemu.git
 ```  
 
-2. Use following command in the root directory of repository to configure `qemu` for `riscv64-linux-user`  
+- Use following command in the root directory of repository to configure `qemu` for `riscv64-linux-user`  
 
-        ./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at  
+```shell
+./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at  
+```  
 
-    **Note:** If this is not your architecture/platform, you can see a list of available platform/architecture by executing following command
+**Note:** If this is not your architecture/platform, you can see a list of available platform/architecture by executing following command.  
 
-        ./configure --help
+```shell
+./configure --help
+```  
 
-3. Use the following command to start the build process  
+- Use the following command to start the build process  
 
-        make -j$(nproc)
+```shell
+make -j$(nproc)
+```  
 
-4. After the builld is complete without any error, use the following command to install binaries at `$PREFIX` location  
+- After the builld is complete without any error, use the following command to install binaries at `$PREFIX` location  
 
-    make install  
+```shell
+make install
+```  
 
-5. Add the `$PREFIX/bin` to `$PATH` variable so that it may be recognized as a command.  
+- Add the `$PREFIX/bin` to `$PATH` variable so that it may be recognized as a command.  
 
-6. Using this method causes the `qemu-riscv64` to have an issue with sysroot. It starts searching for libraries in the root folder of the machine which is based on `x86_64-linux-gnu`. A simple workaround is to give path of the `sysroot/` folder where  `riscv64-unknown-linux-gnu` toolchain is installed. Here that directory will be denoted as `$RISCV_SYSROOT`
+- Using this method causes the `qemu-riscv64` to have an issue with sysroot. It starts searching for libraries in the root folder of the machine which is based on `x86_64-linux-gnu`. A simple workaround is to give path of the `sysroot/` folder where  `riscv64-unknown-linux-gnu` toolchain is installed. Here that directory will be denoted as `$RISCV_SYSROOT`
 
 ### Testing `qemu-riscv64`
 
-1. Create a C file in your favorite editor or by using the commands below:  
+- Create a C file in your favorite editor or by using the commands below:  
 
-        echo "#include<stdio.h>" > helloworld.c
-        echo "int main(){" >> helloworld.c
-        echo "printf("Hello World !");" >> helloworld.c
-        echo '}' >> helloworld.c  
+```shell
+echo "#include<stdio.h>" > helloworld.c
+echo "int main(){" >> helloworld.c
+echo "printf("Hello World !");" >> helloworld.c
+echo '}' >> helloworld.c
+```  
 
-2. Execute following command to compile C program with `riscv gnu toolchain`  
+- Execute following command to compile C program with `riscv gnu toolchain`  
 
-        riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld  
+```shell
+riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
+```  
 
-3. Execute following command to execute the compiled binary on `qemu-riscv64`  
+- Execute following command to execute the compiled binary on `qemu-riscv64`  
 
-        qemu-riscv64 -L $RISCV_SYSROOT ./helloworld  
+```shell
+qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
+```  
 
-4. If everything went right, following output will be shown.  
+- If everything went right, following output will be shown.  
 
-        :::bash
-        Hello World !
+```shell
+Hello World !
+```

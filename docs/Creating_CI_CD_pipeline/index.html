@@ -121,35 +121,53 @@
                 <h1 id="creating-a-cicd-pipeline-in-jenkins">Creating a CI/CD pipeline in Jenkins</h1>
 <h2 id="pre-requisistes">Pre Requisistes</h2>
 <p>For sake of this documentation, jenkins built-in sample script is used to create and execute a cd/cd pipeline in jenkins. In the built-in script maven is used as M3, so one must install <code>Maven</code> plugin inside jenkins and name it <code>M3</code>. Usually maven is already present inside jenkins and can be configured from <code>Global Configuration Tools</code>. Following steps demonstrate configuring Maven plugin.  </p>
-<ol>
+<ul>
 <li>Go to Jenkins <code>Dashboard</code> and click on <code>Manage Jenkins</code></li>
 <li>In <code>Manage Jenkins</code>, under <code>System Configuration</code> section, click on <code>Global Tool Configuration</code>.  </li>
-</ol>
+</ul>
 <p><img alt="unnamed" src="../doc_images/unnamed.png" /></p>
-<ol>
+<ul>
 <li>In <code>Global Tool Configuration</code>, scroll down to Maven section and click on the respective option under the <code>Maven</code> Section (should be <code>Maven installations…</code> or <code>Add Maven</code>).  </li>
-</ol>
+</ul>
 <p><img alt="unnamed (1)" src="../doc_images/unnamed (1).png" /></p>
-<ol>
-<li>Under <code>Maven installations</code>, enter <code>M3</code> in “name” text box, check <code>Install Automatically</code> and select <code>Version</code> greater than 3, then click <code>Apply</code> and <code>Save</code>.</li>
-<li>This should install Maven version 3 and configure as <code>M3</code>.</li>
-</ol>
+<ul>
+<li>
+<p>Under <code>Maven installations</code>, enter <code>M3</code> in “name” text box, check <code>Install Automatically</code> and select <code>Version</code> greater than 3, then click <code>Apply</code> and <code>Save</code>.  </p>
+</li>
+<li>
+<p>This should install Maven version 3 and configure as <code>M3</code>.</p>
+</li>
+</ul>
 <h2 id="steps-for-jenkins-pipeline-creation">Steps for Jenkins pipeline creation</h2>
-<ol>
-<li>After installing Jenkins and having all the suggested plugins installed, go to Jenkins dashboard and click on <code>Create Job</code>.</li>
-<li>On the next page, give your pipeline a name, select <code>Pipeline</code> and click <code>OK</code>.</li>
-</ol>
+<ul>
+<li>
+<p>After installing Jenkins and having all the suggested plugins installed, go to Jenkins dashboard and click on <code>Create Job</code>.  </p>
+</li>
+<li>
+<p>On the next page, give your pipeline a name, select <code>Pipeline</code> and click <code>OK</code>.</p>
+</li>
+</ul>
 <p><img alt="unnamed (2)" src="../doc_images/unnamed (2).png" /></p>
-<ol>
-<li>A <code>Configuration</code> page for the pipeline will appear.</li>
-<li>Select <code>Build Triggers</code> options and <code>General</code> options according to need and scroll down to the Pipeline section.</li>
-</ol>
+<ul>
+<li>
+<p>A <code>Configuration</code> page for the pipeline will appear.  </p>
+</li>
+<li>
+<p>Select <code>Build Triggers</code> options and <code>General</code> options according to need and scroll down to the Pipeline section.</p>
+</li>
+</ul>
 <p><img alt="unnamed (3)" src="../doc_images/unnamed (3).png" /></p>
-<ol>
-<li>Definition section contains configuration for stages and steps of the pipeline. Under <code>Definition</code> section, you can either choose <code>Pipeline script</code> and try writing your own script or try some sample pipeline (like <code>Hello World</code>, <code>Github+Maven</code> etc) or you could select <code>Pipeline script from SCM</code> and give a github repository containing configurations of Pipeline.</li>
-<li>Press <code>Save</code> and <code>Apply</code>.</li>
-<li>This should take you to the Pipeline and you can build the pipeline and if no unresolved dependencies are present, the pipeline should build without any error.</li>
-</ol>
+<ul>
+<li>
+<p>Definition section contains configuration for stages and steps of the pipeline. Under <code>Definition</code> section, you can either choose <code>Pipeline script</code> and try writing your own script or try some sample pipeline (like <code>Hello World</code>, <code>Github+Maven</code> etc) or you could select <code>Pipeline script from SCM</code> and give a github repository containing configurations of Pipeline.  </p>
+</li>
+<li>
+<p>Press <code>Save</code> and <code>Apply</code>.  </p>
+</li>
+<li>
+<p>This should take you to the Pipeline and you can build the pipeline and if no unresolved dependencies are present, the pipeline should build without any error.</p>
+</li>
+</ul>
               
             </div>
           </div><footer>

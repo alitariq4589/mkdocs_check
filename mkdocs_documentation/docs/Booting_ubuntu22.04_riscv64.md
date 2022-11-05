@@ -14,7 +14,7 @@ _**Note:** Make sure RISC-V GNU Toolchain is installed before proceeding_
 
 _**Note:** If you plan on installing U-boot from apt or some system repository, install the one which comes with ubuntu 22.04. Older will not work with this process. Also, be sure to checkout a latest Stable version instead of development version._  
 
-1. Get source code of u-boot and checkout stable version using commands below.  
+- Get source code of u-boot and checkout stable version using commands below.  
 
 ```shell
 git clone https://github.com/qemu/u-boot.git
@@ -22,19 +22,19 @@ cd u-boot
 git checkout v2022.10
 ```  
 
-2. Generate configurations for supervisor mode with following command.  
+- Generate configurations for supervisor mode with following command.  
 
 ```shell
 make qemu-riscv64_smode_defconfig CROSS_COMPILE=riscv64-unknown-linux-gnu-
 ```  
 
-3. Execute following command to start build process.  
+- Execute following command to start build process.  
 
 ```shell
 make CROSS_COMPILE=riscv64-unknown-linux-gnu-
 ```
 
-4. This should install `u-boot.bin` in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as `$UBOOTPATH`.
+- This should install `u-boot.bin` in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as `$UBOOTPATH`.
 
 ### 2. Installing Qemu  
 

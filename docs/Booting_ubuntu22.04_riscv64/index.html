@@ -125,20 +125,23 @@
 <ol>
 <li>Get source code of u-boot and checkout stable version using commands below.  </li>
 </ol>
-<pre><code class="language-shell">git clone https://github.com/qemu/u-boot.git
-cd u-boot
+<div class="codehilite"><pre><span></span>git clone https://github.com/qemu/u-boot.git
+<span class="nb">cd</span> u-boot
 git checkout v2022.10
-</code></pre>
+</pre></div>
+
 <ol>
 <li>Generate configurations for supervisor mode with following command.  </li>
 </ol>
-<pre><code class="language-shell">make qemu-riscv64_smode_defconfig CROSS_COMPILE=riscv64-unknown-linux-gnu-
-</code></pre>
+<div class="codehilite"><pre><span></span>make qemu-riscv64_smode_defconfig <span class="nv">CROSS_COMPILE</span><span class="o">=</span>riscv64-unknown-linux-gnu-
+</pre></div>
+
 <ol>
 <li>Execute following command to start build process.  </li>
 </ol>
-<pre><code class="language-shell">make CROSS_COMPILE=riscv64-unknown-linux-gnu-
-</code></pre>
+<div class="codehilite"><pre><span></span>make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>riscv64-unknown-linux-gnu-
+</pre></div>
+
 <ol>
 <li>This should install <code>u-boot.bin</code> in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as <code>$UBOOTPATH</code>.</li>
 </ol>
@@ -149,21 +152,24 @@ git checkout v2022.10
 <h2 id="booting-ubuntu-2204-image-on-qemu">Booting Ubuntu 22.04 Image on qemu</h2>
 <p>In the directory where ubuntu 22.04 image is present, execute following command to boot into ubuntu 22.04 with <code>qemu-system-riscv64</code>.  </p>
 <p>If you need more space, you can use following command.  </p>
-<pre><code class="language-shell">qemu-img resize -f raw ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img +5G
-</code></pre>
+<div class="codehilite"><pre><span></span>qemu-img resize -f raw ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img +5G
+</pre></div>
+
 <p>This will increase storage size of the image by 5GB.  </p>
-<pre><code class="language-shell">qemu-system-riscv64 \
--machine virt -nographic -m 2048 -smp 4 \
--kernel $UBOOTPATH/u-boot.bin \
--device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
--drive file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
-</code></pre>
+<div class="codehilite"><pre><span></span>qemu-system-riscv64 <span class="se">\</span>
+-machine virt -nographic -m <span class="m">2048</span> -smp <span class="m">4</span> <span class="se">\</span>
+-kernel <span class="nv">$UBOOTPATH</span>/u-boot.bin <span class="se">\</span>
+-device virtio-net-device,netdev<span class="o">=</span>eth0 -netdev user,id<span class="o">=</span>eth0 <span class="se">\</span>
+-drive <span class="nv">file</span><span class="o">=</span>ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,format<span class="o">=</span>raw,if<span class="o">=</span>virtio
+</pre></div>
+
 <p>Here <code>-m</code> is the memory in Megabytes and <code>-smp</code> is number of cores. <code>-nographic</code> means qemu will use same terminal instance instead of opening a new window of its own (which is beneficial while running servers without gui).  </p>
 <p>This should boot ubuntu 22.04. But it will take a while on first start.  </p>
 <p>On start, credentials will be as follows.  </p>
-<pre><code class="language-shell">Username: ubuntu
+<div class="codehilite"><pre><span></span>Username: ubuntu
 Password: ubuntu
-</code></pre>
+</pre></div>
+
 <p>After entering credentials, terminal will prompt for change of password after which ubuntu will be ready to use.</p>
               
             </div>

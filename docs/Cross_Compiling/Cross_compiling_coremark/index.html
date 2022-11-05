@@ -115,8 +115,9 @@
 <p>Coremark is another benchmarking tool. Here coremark will be cross-compiled for <code>riscv64-unknown-linux-gnu</code> and will be run on <code>qemu-riscv64</code>.  The github source code commit at the time of build is <code>eefc986ebd3452d6adde22eafaff3e5c859f29e4</code> and branch is <code>main</code>.  </p>
 <h2 id="getting-the-source-code">Getting the source code</h2>
 <p>Execute the following command to get the source code of coremark.  </p>
-<pre><code class="language-shell">git clone https://github.com/eembc/coremark.git
-</code></pre>
+<div class="codehilite"><pre><span></span>git clone https://github.com/eembc/coremark.git
+</pre></div>
+
 <h2 id="tweaking-source-files-for-riscv64-unknown-linux-gnu">Tweaking source files for <code>riscv64-unknown-linux-gnu</code></h2>
 <p>At the time of this documentation, linux is being used for this test. First of all <code>core_portme.mak</code> will be changed.  </p>
 <ol>
@@ -133,26 +134,27 @@
 <li>Now open <code>core_portme.h</code> and change <code>#define USE_CLOCK 0</code> to <code>#define  USE_CLOCK 1</code> and save.</li>
 <li>Navigate to source directory of repository and execute following command  </li>
 </ol>
-<pre><code class="language-shell">make PORT_DIR=linux/
-</code></pre>
+<div class="codehilite"><pre><span></span>make <span class="nv">PORT_DIR</span><span class="o">=</span>linux/
+</pre></div>
+
 <p>If everything went right, the output result will be stored in <code>run1.log</code> and <code>run2.log</code> and will be of the form as shown below.  </p>
-<pre><code class="language-shell">2K validation run parameters for coremark.
-CoreMark Size    : 666
-Total ticks      : 12368459
-Total time (secs): 12.368459
-Iterations/Sec   : 8893.589735
-Iterations       : 110000
+<div class="codehilite"><pre><span></span>2K validation run parameters <span class="k">for</span> coremark.
+CoreMark Size    : <span class="m">666</span>
+Total ticks      : <span class="m">12368459</span>
+Total <span class="nb">time</span> <span class="o">(</span>secs<span class="o">)</span>: <span class="m">12</span>.368459
+Iterations/Sec   : <span class="m">8893</span>.589735
+Iterations       : <span class="m">110000</span>
 Compiler version : GCC12.2.0
-Compiler flags   : -O2 -DPERFORMANCE_RUN=1  -lrt
+Compiler flags   : -O2 -DPERFORMANCE_RUN<span class="o">=</span><span class="m">1</span>  -lrt
 Memory location  : Please put data memory location here
-            (e.g. code in flash, data on heap etc)
+            <span class="o">(</span>e.g. code in flash, data on heap etc<span class="o">)</span>
 seedcrc          : 0x18f2
-[0]crclist       : 0xe3c1
-[0]crcmatrix     : 0x0747
-[0]crcstate      : 0x8d84
-[0]crcfinal      : 0x0956
-Correct operation validated. See README.md for run and reporting rules.
-</code></pre>
+<span class="o">[</span><span class="m">0</span><span class="o">]</span>crclist       : 0xe3c1
+<span class="o">[</span><span class="m">0</span><span class="o">]</span>crcmatrix     : 0x0747
+<span class="o">[</span><span class="m">0</span><span class="o">]</span>crcstate      : 0x8d84
+<span class="o">[</span><span class="m">0</span><span class="o">]</span>crcfinal      : 0x0956
+Correct operation validated. See README.md <span class="k">for</span> run and reporting rules.
+</pre></div>
               
             </div>
           </div><footer>

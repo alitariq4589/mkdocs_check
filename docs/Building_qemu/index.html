@@ -144,17 +144,17 @@
 </ol>
 <h2 id="installing-pre-requisites">Installing Pre-requisites</h2>
 <p>Execute the following command to install the pre-requisites for installing <code>qemu</code> on ubuntu 22.04 (jammy)  </p>
-<pre class="codehilite"><code class="language-shell">sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+<pre class="codehilite"><code>    sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 </code></pre>
 
 <p><code>qemu-slirp</code> is important for enabling user-level networking with <code>qemu-system-riscv64</code> <code>qemu-system-riscv64</code> while loading image of server installation of ubuntu. So it needs to be installed first.  </p>
 <p>Get the source code of <code>qemu-slirp</code> using following command:  </p>
-<pre class="codehilite"><code class="language-shell">git clone https://github.com/openSUSE/qemu-slirp.git
+<pre class="codehilite"><code>    git clone https://github.com/openSUSE/qemu-slirp.git
 </code></pre>
 
 <p>Then Execute following commands to install <code>slirp</code> in meson, which can later be used by qemu during build.  </p>
-<pre class="codehilite"><code class="language-shell">meson build
-ninja -C build install
+<pre class="codehilite"><code>    meson build
+    ninja -C build install
 </code></pre>
 
 <p><strong>Note:</strong> Make sure you have <code>riscv64-unknown-linux-gnu</code> toolchain installed for compiling program and executing them on qemu later.</p>
@@ -166,30 +166,35 @@ ninja -C build install
 <ol>
 <li>
 <p>Get source code of <code>qemu</code> from github using the command below  </p>
-<p>:::shell
-git clone https://github.com/qemu/qemu.git</p>
+<pre class="codehilite"><code>git clone https://github.com/qemu/qemu.git
+</code></pre>
+
 </li>
 <li>
 <p>Configure qemu for <code>riscv64-softmmu</code> with following command (replace $PREFIX with valid location of installation).  </p>
-<p>:::shell
-./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp  </p>
+<pre class="codehilite"><code>./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp
+</code></pre>
+
 </li>
 <li>
 <p>Execute following command to start the build.  </p>
-<p>:::shell
-make  </p>
+<pre class="codehilite"><code>make
+</code></pre>
+
 </li>
 <li>
 <p>Execute following command to install the binaries at <code>$PREFIX</code> location.  </p>
-<p>:::shell
-make install</p>
+<pre class="codehilite"><code>make install
+</code></pre>
+
 </li>
 </ol>
 <p><em><strong>Note:</strong> After the installation with <code>slirp</code> following error can be encountered on some systems</em>  </p>
-<p>:::shell
-qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0  </p>
+<pre class="codehilite"><code>qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0
+</code></pre>
+
 <p><em><strong>Solution:</strong> This can be solved by executing following command in source directory of qemu (which is cloned from github)</em>  </p>
-<pre class="codehilite"><code class="language-shell">[sudo] ldconfig
+<pre class="codehilite"><code>    [sudo] ldconfig
 </code></pre>
 
 <h3 id="testing-qemu-system-riscv64">Testing <code>qemu-system-riscv64</code></h3>
@@ -202,29 +207,30 @@ Throughout cross-compiling section, <code>qemu-riscv64</code> will be used with 
 <ol>
 <li>
 <p>Get source code of <code>qemu</code> using the command below  </p>
-<p>:::shell
-git clone https://github.com/qemu/qemu.git  </p>
+<pre class="codehilite"><code>git clone https://github.com/qemu/qemu.git
+</code></pre>
+
 </li>
 <li>
 <p>Use following command in the root directory of repository to configure <code>qemu</code> for <code>riscv64-linux-user</code>  </p>
-<p>:::shell
-./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at  </p>
+<pre class="codehilite"><code>./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at
+</code></pre>
+
 <p><strong>Note:</strong> If this is not your architecture/platform, you can see a list of available platform/architecture by executing following command</p>
-<p>:::shell
-./configure --help</p>
+<pre class="codehilite"><code>./configure --help
+</code></pre>
+
 </li>
 <li>
 <p>Use the following command to start the build process  </p>
-<p>:::shell
-make -j$(nproc)</p>
+<pre class="codehilite"><code>make -j$(nproc)
+</code></pre>
+
 </li>
 <li>
 <p>After the builld is complete without any error, use the following command to install binaries at <code>$PREFIX</code> location  </p>
+<p>make install  </p>
 </li>
-</ol>
-<pre><code class="language-shell">make install
-</code></pre>
-<ol>
 <li>
 <p>Add the <code>$PREFIX/bin</code> to <code>$PATH</code> variable so that it may be recognized as a command.  </p>
 </li>
@@ -234,28 +240,34 @@ make -j$(nproc)</p>
 </ol>
 <h3 id="testing-qemu-riscv64">Testing <code>qemu-riscv64</code></h3>
 <ol>
-<li>Create a C file in your favorite editor or by using the commands below:  </li>
-</ol>
-<pre><code class="language-shell">echo &quot;#include&lt;stdio.h&gt;&quot; &gt; helloworld.c
+<li>
+<p>Create a C file in your favorite editor or by using the commands below:  </p>
+<pre class="codehilite"><code>echo &quot;#include&lt;stdio.h&gt;&quot; &gt; helloworld.c
 echo &quot;int main(){&quot; &gt;&gt; helloworld.c
 echo &quot;printf(&quot;Hello World !&quot;);&quot; &gt;&gt; helloworld.c
 echo '}' &gt;&gt; helloworld.c
 </code></pre>
-<ol>
-<li>Execute following command to compile C program with <code>riscv gnu toolchain</code>  </li>
-</ol>
-<pre><code class="language-shell">riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
+
+</li>
+<li>
+<p>Execute following command to compile C program with <code>riscv gnu toolchain</code>  </p>
+<pre class="codehilite"><code>riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
 </code></pre>
-<ol>
-<li>Execute following command to execute the compiled binary on <code>qemu-riscv64</code>  </li>
-</ol>
-<pre><code class="language-shell">qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
+
+</li>
+<li>
+<p>Execute following command to execute the compiled binary on <code>qemu-riscv64</code>  </p>
+<pre class="codehilite"><code>qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
 </code></pre>
-<ol>
-<li>If everything went right, following output will be shown.  </li>
-</ol>
-<pre><code class="language-shell">Hello World !
+
+</li>
+<li>
+<p>If everything went right, following output will be shown.  </p>
+<pre class="codehilite"><code>Hello World !
 </code></pre>
+
+</li>
+</ol>
               
             </div>
           </div><footer>

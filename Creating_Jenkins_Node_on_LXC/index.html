@@ -180,18 +180,19 @@ The state of the container can be checked using the following command.  </p>
 <h2 id="using-ssh-to-access-container-with-username-and-password">Using SSH to access container with username and password</h2>
 <p>The above mentioned method can be used to attach the host machine terminal to the container and this can be used to access the container. But if one wants to access the machine remotely then one possible and well-known method will be to configure and use SSH on the container.</p>
 <p>As it is an out of the box linux distro and only the root user is present, so first create another user using the following command and then manage its permissions for <code>/home folder</code>.</p>
-<pre><code class="language-shell">#Considering you remain the root user for execution of all the  following #commands
+<div class="codehilite"><pre><span></span><span class="c1">#Considering you remain the root user for execution of all the  following #commands</span>
 
 useradd user1
-cd /home
-mkdir user1    #Creating home directory for user1
-chown user1:user1 user1  #Giving ownership of home directory to new user
+<span class="nb">cd</span> /home
+mkdir user1    <span class="c1">#Creating home directory for user1</span>
+chown user1:user1 user1  <span class="c1">#Giving ownership of home directory to new user</span>
 
-#For adding the same shell and bashrc configurations for new user, use #following
-#command, otherwise the shell will be very basic for new user and will be #very inconvenient to use.
+<span class="c1">#For adding the same shell and bashrc configurations for new user, use #following</span>
+<span class="c1">#command, otherwise the shell will be very basic for new user and will be #very inconvenient to use.</span>
 
 usermod -s /bin/bash user1
-</code></pre>
+</pre></div>
+
 <p>For the sake of simplicity of this document the name used for the new user is <code>user1</code> here.
 (You may want to set the password for <code>user1</code> by executing the <code>passwd</code> command in root.)</p>
 <p>At this point <code>user1</code> is not in sudoers. For adding it to the sudoers, it must be added in the sudo group which can be done by using the following command.  </p>
@@ -201,12 +202,13 @@ usermod -s /bin/bash user1
 <p>Now install openssh-server for configuring the ssh on user1.  </p>
 <p><code>sudo apt install openssh-server</code>  </p>
 <p>After that one must find the ip of the container we are using, for this either run following command while in container with user1,</p>
-<pre><code class="language-shell">sudo apt-install net-tools
+<div class="codehilite"><pre><span></span>sudo apt-install net-tools
 
-#Because ifconfig is part of net-tools which are by default not installed on new #container
+<span class="c1">#Because ifconfig is part of net-tools which are by default not installed on new #container</span>
 
 Ifconfig -a
-</code></pre>
+</pre></div>
+
 <p><img alt="unnamed (7)" src="../doc_images/unnamed (7).png" />  </p>
 <p>OR open a new terminal in the host machine and execute the following command.  </p>
 <p><code>lxc-info my-container -iH</code>  </p>
@@ -218,9 +220,10 @@ The command for establishing an ssh connection to a remote machine is mentioned 
 <p><img alt="unnamed (9)" src="../doc_images/unnamed (9).png" />  </p>
 <h2 id="using-ssh-to-access-jenkins-agents-on-the-container">Using SSH to access Jenkins agents on the container</h2>
 <p>First install some initial dependencies (git, jdk, jre) on the containers for running agents on the container.</p>
-<pre><code class="language-shell">sudo apt update
+<div class="codehilite"><pre><span></span>sudo apt update
 sudo apt install default-jdk default-jre git maven
-</code></pre>
+</pre></div>
+
 <p>Now login to jenkins with administrator privileges and create a node in it from <code>Dashboard &gt; Manage Jenkins &gt; Nodes</code> and press <code>+ New Node</code>. Enter a name for the node and select the desirable node type.
 For this documentation, the node will be a permanent type and the name will be <code>temp_node</code>.  </p>
 <p><img alt="unnamed (10)" src="../doc_images/unnamed (10).png" />  </p>

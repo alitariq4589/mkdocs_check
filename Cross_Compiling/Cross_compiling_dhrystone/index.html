@@ -123,19 +123,22 @@ Dhrystone is comparable to VAX 11/780 in a way that VAX 11/780 achieves 1757 dhr
 <ol>
 <li>Get the source code of <code>dhrystone</code> using the command below  </li>
 </ol>
-<pre><code class="language-shell">git clone https://github.com/sifive/benchmark-dhrystone.git
-</code></pre>
+<div class="codehilite"><pre><span></span>git clone https://github.com/sifive/benchmark-dhrystone.git
+</pre></div>
+
 <ol>
 <li>Navigate to root directory of repository and compile program with <code>riscv64-unknown-linux-gnu-gcc</code> instead of native <code>gcc</code>  </li>
 </ol>
-<pre><code class="language-shell">cd benchmark-dhrystone
-make CC=riscv64-unknown-linux-gnu-gcc
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> benchmark-dhrystone
+make <span class="nv">CC</span><span class="o">=</span>riscv64-unknown-linux-gnu-gcc
+</pre></div>
+
 <ol>
 <li>Execute following command to execute <code>dhrystone</code> binary  </li>
 </ol>
-<pre><code class="language-shell">qemu-riscv64 -L $RISCV_SYSROOT ./dhrystone
-</code></pre>
+<div class="codehilite"><pre><span></span>qemu-riscv64 -L <span class="nv">$RISCV_SYSROOT</span> ./dhrystone
+</pre></div>
+
 <p><strong>Note:</strong> You may want to tweak <code>Makefile</code> and <code>dhry_1.c</code> a little bit to get the correct results.  </p>
               
             </div>

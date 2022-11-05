@@ -9,8 +9,8 @@
 
 Execute the following command to install the pre-requisites for installing `qemu` on ubuntu 22.04 (jammy)  
 
-    :::bash
-    sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+
+        sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 
 
 `qemu-slirp` is important for enabling user-level networking with `qemu-system-riscv64` `qemu-system-riscv64` while loading image of server installation of ubuntu. So it needs to be installed first.  

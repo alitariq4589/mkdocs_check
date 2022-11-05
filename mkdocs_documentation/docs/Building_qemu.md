@@ -9,16 +9,17 @@
 
 Execute the following command to install the pre-requisites for installing `qemu` on ubuntu 22.04 (jammy)  
 
-
-        sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
-
+```shell
+sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+```
 
 `qemu-slirp` is important for enabling user-level networking with `qemu-system-riscv64` `qemu-system-riscv64` while loading image of server installation of ubuntu. So it needs to be installed first.  
 
 Get the source code of `qemu-slirp` using following command:  
 
-        git clone https://github.com/openSUSE/qemu-slirp.git
-
+```
+git clone https://github.com/openSUSE/qemu-slirp.git
+```
 
 Then Execute following commands to install `slirp` in meson, which can later be used by qemu during build.  
 
@@ -76,7 +77,9 @@ Throughout cross-compiling section, `qemu-riscv64` will be used with `linux-user
 
 1. Get source code of `qemu` using the command below  
 
-        git clone https://github.com/qemu/qemu.git  
+```shell
+git clone https://github.com/qemu/qemu.git
+```
 
 2. Use following command in the root directory of repository to configure `qemu` for `riscv64-linux-user`  
 

@@ -122,26 +122,26 @@
 </ol>
 <h3 id="1-installing-u-boot">1. Installing U-boot</h3>
 <p><em><strong>Note:</strong> If you plan on installing U-boot from apt or some system repository, install the one which comes with ubuntu 22.04. Older will not work with this process. Also, be sure to checkout a latest Stable version instead of development version.</em>  </p>
-<ol>
+<ul>
 <li>Get source code of u-boot and checkout stable version using commands below.  </li>
-</ol>
+</ul>
 <pre><code class="language-shell">git clone https://github.com/qemu/u-boot.git
 cd u-boot
 git checkout v2022.10
 </code></pre>
-<ol>
+<ul>
 <li>Generate configurations for supervisor mode with following command.  </li>
-</ol>
+</ul>
 <pre><code class="language-shell">make qemu-riscv64_smode_defconfig CROSS_COMPILE=riscv64-unknown-linux-gnu-
 </code></pre>
-<ol>
+<ul>
 <li>Execute following command to start build process.  </li>
-</ol>
+</ul>
 <pre><code class="language-shell">make CROSS_COMPILE=riscv64-unknown-linux-gnu-
 </code></pre>
-<ol>
+<ul>
 <li>This should install <code>u-boot.bin</code> in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as <code>$UBOOTPATH</code>.</li>
-</ol>
+</ul>
 <h3 id="2-installing-qemu">2. Installing Qemu</h3>
 <p>Qemu version 7.0 or greater should be installed with networking for ubuntu 22.04 to work. See <a href="../Building_qemu/">Installing Qemu for RISC-V</a> for instructions on installing <code>qemu-system-riscv64</code>.  </p>
 <h3 id="3-getting-ubuntu-2204-pre-build-image-for-risc-v">3. Getting Ubuntu 22.04 pre-build image for RISC-V</h3>

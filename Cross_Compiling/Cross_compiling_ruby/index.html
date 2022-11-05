@@ -135,21 +135,18 @@
 <strong>Operating System for Installation Procedure:</strong> Ubuntu 20.04</p>
 <h2 id="pre-requisites">Pre-requisites</h2>
 <p>Pre-requisites for installing ruby from source can be installed using the following command  </p>
-<div class="codehilite"><pre><span></span>sudo apt-get -y install libc6-dev libssl-dev libmysql++-dev libsqlite3-dev make build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev
-</pre></div>
-
+<pre><code class="language-shell">sudo apt-get -y install libc6-dev libssl-dev libmysql++-dev libsqlite3-dev make build-essential libssl-dev libreadline6-dev zlib1g-dev libyaml-dev
+</code></pre>
 <p>Other than this, ruby itself is needed for building ruby from source.</p>
-<div class="codehilite"><pre><span></span>sudo apt install ruby
-</pre></div>
-
+<pre><code class="language-shell">sudo apt install ruby
+</code></pre>
 <p>There is another thing which needs to be taken care of before building ruby from source. If ruby is installed on system itself using <code>apt</code>, then cross compiling ruby will end up in an error as shown in the image below. This error is seen in <code>ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux-gnu]</code>.  </p>
 <p><img alt="ruby_system_error" src="../../doc_images/ruby_system_error.png" />  </p>
 <p>To tackle this issue, one workaround is to install build ruby for native system, then delete ruby which was installed through <code>apt</code>. This procedure will be added in the <code>Build</code> section.</p>
 <h2 id="getting-source-code">Getting source code</h2>
 <p>Source code of ruby can be obtained from github repository using the command below:  </p>
-<div class="codehilite"><pre><span></span>git clone https://github.com/ruby/ruby.git
-</pre></div>
-
+<pre><code class="language-shell">git clone https://github.com/ruby/ruby.git
+</code></pre>
 <h2 id="build">Build</h2>
 <h3 id="installing-ruby-for-native-architecture">Installing ruby for native architecture</h3>
 <p>Before cross-compiling, one must install ruby from source on the native machine which will solve the error described in <code>Pre-requisites</code> section above.  </p>
@@ -157,58 +154,49 @@
 <li>(<em>THIS STEP IS STRONGLY RECOMMENDED !</em>)In the source directory, create a folder with any name in which <code>Makefile</code> will be generated otherwise there will be a lot of files made in the source directory (possibly create copy of repo directory).  </li>
 <li>In the source directory of ruby run following command to generate <code>configure</code> file.  </li>
 </ul>
-<div class="codehilite"><pre><span></span>./autogen.sh
-</pre></div>
-
+<pre><code class="language-shell">./autogen.sh
+</code></pre>
 <ul>
 <li>After this, run the following <code>configure</code> command to generate <code>Makefile</code>.  </li>
 </ul>
-<div class="codehilite"><pre><span></span>../configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="c1">#$PREFIX is where you want to install binary files at the end, so replace it.</span>
-</pre></div>
-
+<pre><code class="language-shell">../configure --prefix=$PREFIX #$PREFIX is where you want to install binary files at the end, so replace it.
+</code></pre>
 <ul>
 <li>After the above command is completed, run following command to start the build  </li>
 </ul>
-<div class="codehilite"><pre><span></span>make -j<span class="k">$(</span>nproc<span class="k">)</span> <span class="c1">#-j$(nproc) uses parallelism for make</span>
-</pre></div>
-
+<pre><code class="language-shell">make -j$(nproc) #-j$(nproc) uses parallelism for make
+</code></pre>
 <ul>
 <li>After the above command is complete, run following command to install the binaries on the specified path mentioned in <code>--prefix</code> above  </li>
 </ul>
-<div class="codehilite"><pre><span></span>make install
-</pre></div>
-
+<pre><code class="language-shell">make install
+</code></pre>
 <ul>
 <li>Now ruby should be available in the <code>$PREFIX</code> path (also in the <code>.bashrc</code>). Add $PREFIX path to $PATH variable and uninstall the the ruby installed using <code>apt</code> otherwise, the source will keep using that one for building and the error will persist.  </li>
 </ul>
-<div class="codehilite"><pre><span></span>sudo apt purge ruby
-</pre></div>
-
+<pre><code class="language-shell">sudo apt purge ruby
+</code></pre>
 <h3 id="cross-compiling-ruby-for-riscv64-unknown-linux-gnu">Cross-Compiling Ruby for <code>riscv64-unknown-linux-gnu</code></h3>
 <ul>
 <li>After the ruby installed using <code>apt</code> is uninstalled from the system, clean the working directory with following command.  </li>
 </ul>
-<div class="codehilite"><pre><span></span>make clean
-</pre></div>
-
+<pre><code class="language-shell">make clean
+</code></pre>
 <ul>
 <li>After cleaning the working directory, generate the <code>Makefile</code> again for cross-compiling ruby for <code>riscv64-unknown-linux-gnu</code> target and host using the command below  </li>
 </ul>
-<div class="codehilite"><pre><span></span>../../configure --prefix<span class="o">=</span><span class="nv">$PREFIX</span> --build<span class="o">=</span>x86_64-linux-gnu --host<span class="o">=</span>riscv64-unknown-linux-gnu --target<span class="o">=</span>riscv64-unknown-linux-gnu
-</pre></div>
-
+<pre><code class="language-shell">../../configure --prefix=$PREFIX --build=x86_64-linux-gnu --host=riscv64-unknown-linux-gnu --target=riscv64-unknown-linux-gnu
+</code></pre>
 <ul>
 <li>After the above command is successful, start build with following command  </li>
 </ul>
-<div class="codehilite"><pre><span></span>make -j<span class="o">(</span>nproc<span class="o">)</span>
-</pre></div>
-
+<pre><code class="language-shell">make -j(nproc)
+</code></pre>
 <ul>
 <li>Install the binaries in path mentioned with <code>--prefix</code> above with following command  </li>
 </ul>
-<div class="codehilite"><pre><span></span>make install
-</pre></div>
-
+<pre><code class="language-shell">make install
+</code></pre>
 <ul>
 <li>After this process, ruby will be installed inside <code>$PREFIX/</code> directory.  </li>
 </ul>

@@ -138,53 +138,51 @@
 <h2 id="creating-multinode-pipelines-in-jenkins-native-pipeline-job">Creating multinode pipelines in Jenkins native pipeline job</h2>
 <h3 id="scripted-pipeline">Scripted Pipeline</h3>
 <p>For creating a multinode pipeline with jenkins native scripted pipeline job, jenkinsfile can be tweaked. The keyword <code>node</code> can be used to specify the node in which the stages are going to run and this keyword can also be used in between stages. Following screenshot indicates a code in which first stage runs on node named <code>container-node</code>. While the second node runs on node named <code>container-node2</code>.  </p>
-<div class="codehilite"><pre><span></span>node <span class="o">(</span><span class="s1">&#39;container-node&#39;</span><span class="o">)</span> <span class="o">{</span>
-    stage <span class="o">(</span><span class="s1">&#39;*** Creating a directory in container-node ***&#39;</span><span class="o">){</span>
-        sh <span class="s1">&#39;&#39;&#39;#!/bin/bash</span>
-<span class="s1">        mkdir newdir_container-node-$RANDOM</span>
-<span class="s1">        &#39;&#39;&#39;</span>
-    <span class="o">}</span>
-    stage <span class="o">(</span><span class="s1">&#39;*** Creating a directory in container-node2&#39;</span><span class="o">){</span>
-        node <span class="o">(</span><span class="s1">&#39;container-node2&#39;</span><span class="o">){</span>
-                sh<span class="s1">&#39;&#39;&#39;#!/bin/bash</span>
-<span class="s1">                mkdir newdir_container-node2-$RANDOM</span>
-<span class="s1">                &#39;&#39;&#39;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
+<pre><code class="language-shell">node ('container-node') {
+    stage ('*** Creating a directory in container-node ***'){
+        sh '''#!/bin/bash
+        mkdir newdir_container-node-$RANDOM
+        '''
+    }
+    stage ('*** Creating a directory in container-node2'){
+        node ('container-node2'){
+                sh'''#!/bin/bash
+                mkdir newdir_container-node2-$RANDOM
+                '''
+        }
+    }
+}
+</code></pre>
 <h3 id="declarative-pipeline">Declarative pipeline</h3>
 <p>For a declarative pipeline the keyword <code>label</code> can be used in the agent block. This can either be done at the start of the pipeline after the keyword <code>pipeline</code> or it can be used inside the stages. The following code builds two stages each of which is built in separate node. The keyword <code>none</code> with agent means that the agent is not specified globally for each stage and it should be specified inside each stage.</p>
-<div class="codehilite"><pre><span></span>pipeline <span class="o">{</span>
+<pre><code class="language-shell">pipeline {
     agent none // Means no agent specified. This means each node will specify its own agent
-    stages <span class="o">{</span>
-        stage<span class="o">(</span><span class="s1">&#39;container-node&#39;</span><span class="o">)</span> <span class="o">{</span>
-            agent<span class="o">{</span>
-                label <span class="s2">&quot;container-node&quot;</span> //Selecting container-node <span class="k">for</span> this stage
-            <span class="o">}</span>
-            steps <span class="o">{</span>
-                sh <span class="s1">&#39;&#39;&#39;#!/bin/bash</span>
-<span class="s1">                    echo &#39;</span>Hello container-node<span class="s1">&#39;</span>
-<span class="s1">                    mkdir &quot;newdir-container-node-$RANDOM&quot;</span>
-<span class="s1">                &#39;&#39;&#39;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        stage<span class="o">(</span><span class="s1">&#39;container-node2&#39;</span><span class="o">){</span>
-            agent<span class="o">{</span>
-                label <span class="s2">&quot;container-node2&quot;</span> //Selecting container-node2 <span class="k">for</span> this stage
-            <span class="o">}</span>
-            steps<span class="o">{</span>
-                sh<span class="s1">&#39;&#39;&#39;#!/bin/bash</span>
-<span class="s1">                    echo &#39;&#39;Hello container-node2</span>
-<span class="s1">                    mkdir &quot;newdir-container-node2-$RANDOM&quot;</span>
-<span class="s1">                &#39;&#39;&#39;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
+    stages {
+        stage('container-node') {
+            agent{
+                label &quot;container-node&quot; //Selecting container-node for this stage
+            }
+            steps {
+                sh '''#!/bin/bash
+                    echo 'Hello container-node'
+                    mkdir &quot;newdir-container-node-$RANDOM&quot;
+                '''
+            }
+        }
+        stage('container-node2'){
+            agent{
+                label &quot;container-node2&quot; //Selecting container-node2 for this stage
+            }
+            steps{
+                sh'''#!/bin/bash
+                    echo ''Hello container-node2
+                    mkdir &quot;newdir-container-node2-$RANDOM&quot;
+                '''
+            }
+        }
+    }
+}
+</code></pre>
 <h2 id="creating-multinode-pipelines-using-jenkins-freestyle-jobs">Creating multinode pipelines using Jenkins freestyle jobs</h2>
 <p>Jenkins freestyle jobs can be combined together by mentioning post-build jobs in the freestyle job settings. Freestyle jobs are customizable and offer more options than jenkins native pipeline jobs. Each job represents a stage and each stage has separate settings. One can use jenkins freestyle jobs to run on a separate node by selecting the option <code>Restrict where this project can be run</code> in the <code>General</code> section of the job's configuration. In the <code>Label Expression</code>, the node's name can be mentioned in which to run the job. The following image shows the option from job's configuration.  </p>
 <p><img alt="image1" src="../doc_images/191689660-ae7c2511-6f0b-48ff-97c7-f6962b9686f4.png" />  </p>

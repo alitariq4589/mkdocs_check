@@ -132,32 +132,27 @@
 <ol>
 <li>Get the source code of <code>openssl</code> and navigate inside the cloned repository using the commands below</li>
 </ol>
-<div class="codehilite"><pre><span></span>git clone https://github.com/openssl/openssl.git
-<span class="nb">cd</span> openssl
-</pre></div>
-
+<pre><code class="language-shell">git clone https://github.com/openssl/openssl.git
+cd openssl
+</code></pre>
 <ol>
 <li>Configure openssl for building. In openssl there are some <code>os/compiler</code> choices which one can use to build for his architecture. But in our case there is no support for building with riscv64. As it is written in C language, so it can be compiled whether or not the support is given. Use the following command to generate a <code>Makefile</code> for <code>linux-generic64</code></li>
 </ol>
-<div class="codehilite"><pre><span></span>./Configure linux-generic64 --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="c1"># Prefix is the directory where you want binaries to be installed at the end</span>
-</pre></div>
-
+<pre><code class="language-shell">./Configure linux-generic64 --prefix=$PREFIX # Prefix is the directory where you want binaries to be installed at the end
+</code></pre>
 <ol>
 <li>After the above command is successfully completed, run the following command to build openssl using <code>riscv64-unknown-linux-gnu-gcc</code> compiler instead of native gcc compiler.</li>
 </ol>
-<div class="codehilite"><pre><span></span>make -j<span class="k">$(</span>nproc<span class="k">)</span> <span class="nv">CC</span><span class="o">=</span>riscv64-unknown-linux-gnu-gcc
-</pre></div>
-
+<pre><code class="language-shell">make -j$(nproc) CC=riscv64-unknown-linux-gnu-gcc
+</code></pre>
 <ol>
 <li>Install the binaries in the specified <code>--prefix</code> using the command below</li>
 </ol>
-<div class="codehilite"><pre><span></span>make -j<span class="k">$(</span>nproc<span class="k">)</span> install <span class="nv">CC</span><span class="o">=</span>riscv64-unknown-linux-gnu-gcc
-</pre></div>
-
+<pre><code class="language-shell">make -j$(nproc) install CC=riscv64-unknown-linux-gnu-gcc
+</code></pre>
 <p>The installed binary can be tested on <code>qemu-riscv64</code> using the command below:</p>
-<div class="codehilite"><pre><span></span>qemu-riscv64 -L <span class="nv">$RISCV_SYSROOT</span> ./openssl
-</pre></div>
-
+<pre><code class="language-shell">qemu-riscv64 -L $RISCV_SYSROOT ./openssl
+</code></pre>
 <p>Here $RISCV_SYSROOT is the <code>sysroot/</code> folder located inside the riscv gnu toolchain installed directory.</p>
 <p>The above mentioned command will start the openssl console if everything went right.  </p>
 <p><strong>Note:</strong> Do not change the directory of openssl or rename it, as it some files inside it are inferred with absolute paths, changing the directory or renaming it will cause other packages to not configure openssl for them when cross-compiling.  </p>
@@ -166,36 +161,30 @@
 <ol>
 <li>Checkout the <code>v1.1.1r</code> of openssl by executing following command in the repository directory.  </li>
 </ol>
-<div class="codehilite"><pre><span></span>git checkout OpenSSL_1_1_1r
-</pre></div>
-
+<pre><code class="language-shell">git checkout OpenSSL_1_1_1r
+</code></pre>
 <ol>
 <li>Execute following command to configure for riscv64 architecture and generate a <code>Makefile</code>.  </li>
 </ol>
-<div class="codehilite"><pre><span></span>./Configure linux64-riscv64 --prefix<span class="o">=</span><span class="nv">$PREFIX</span> <span class="c1"># Replace $PREFIX with where you want to install binaries</span>
-</pre></div>
-
+<pre><code class="language-shell">./Configure linux64-riscv64 --prefix=$PREFIX # Replace $PREFIX with where you want to install binaries
+</code></pre>
 <ol>
 <li>Execute following command to cross-compile for <code>riscv64-unknown-linux-gnu</code>.  </li>
 </ol>
-<div class="codehilite"><pre><span></span>make <span class="nv">CROSS_COMPILE</span><span class="o">=</span>riscv64-unknown-linux-gnu-
-</pre></div>
-
+<pre><code class="language-shell">make CROSS_COMPILE=riscv64-unknown-linux-gnu-
+</code></pre>
 <ol>
 <li>Then install binaries at <code>$PREFIX</code> with following command.  </li>
 </ol>
-<div class="codehilite"><pre><span></span>make install
-</pre></div>
-
+<pre><code class="language-shell">make install
+</code></pre>
 <h3 id="solving-post-installation-errors">Solving post-installation errors</h3>
 <p>On some operating systems, the installed binaries may not run properly and will give following error.  </p>
-<div class="codehilite"><pre><span></span>./openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory
-</pre></div>
-
+<pre><code>./openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory
+</code></pre>
 <p>This means that shared libraries cannot be found in the path where the system is looking for them. This can be solved by setting <code>LD_LIBRARY_PATH</code> variable as follows.  </p>
-<div class="codehilite"><pre><span></span><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$PREFIX</span>/lib:<span class="nv">$LD_LIBRARY_PATH</span>
-</pre></div>
-
+<pre><code class="language-shell">export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
+</code></pre>
 <p>It will be a good practice to include the above in the <code>bashrc</code> for debian users.</p>
               
             </div>

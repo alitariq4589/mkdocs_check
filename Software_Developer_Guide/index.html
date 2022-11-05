@@ -137,16 +137,16 @@ Currently, the specifications for RISC-V CI is as follows.</p>
 <h2 id="setting-up-jenkinsfile-inside-github-project-repository">Setting up <code>Jenkinsfile</code> inside github project repository</h2>
 <p>Jenkins pipeline will need a <code>Jenkinsfile</code> written with jenkins pipeline syntax to start execution of tests/checks (see <a href="https://www.jenkins.io/doc/book/pipeline/syntax/">link</a>). This pipeline will contain all the stages (and may be steps) of a CI/CD pipeline. This pipeline can be <code>scripted pipeline</code> which will only have stages or it can also be <code>declarative pipeline</code> which may also have steps inside stages.  </p>
 <p>A simple scripted <code>Helloworld</code> pipeline in linux is as follows:</p>
-<div class="codehilite"><pre><span></span>node<span class="o">{</span>
-    stage<span class="o">(</span><span class="s1">&#39;*** Compilation Phase ***&#39;</span><span class="o">)</span> <span class="o">{</span>
+<pre><code class="language-shell">
+node{
+    stage('*** Compilation Phase ***') {
         //Using bash commands
-        sh <span class="s1">&#39;&#39;&#39;#!/bin/bash</span>
-<span class="s1">            echo &quot;Hello World !\n&quot;</span>
-<span class="s1">         &#39;&#39;&#39;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-
+        sh '''#!/bin/bash
+            echo &quot;Hello World !\n&quot;
+         '''
+    }
+}
+</code></pre>
 <p>Upon execution of such a pipeline, the console output can be viewed as follows.  </p>
 <p><img alt="Console Output" src="../doc_images/Console output for Hello World.png" /></p>
 <p><em><strong>Note:</strong> This jenkinsfile should remain same in all the branches and pull requests.</em>  </p>

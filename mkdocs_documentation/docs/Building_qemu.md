@@ -72,7 +72,6 @@ qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol:
 
 _**Solution:** This can be solved by executing following command in source directory of qemu (which is cloned from github)_  
 
-
 ```shell
 [sudo] ldconfig
 ```  

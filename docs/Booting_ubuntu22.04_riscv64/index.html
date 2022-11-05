@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Building Jenkins - RISC-V CI Docs</title>
+    <title>Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64` - RISC-V CI Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Building Jenkins";
-        var mkdocs_page_input_path = "Building_Jenkins_github_repo.md";
+        var mkdocs_page_name = "Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64`";
+        var mkdocs_page_input_path = "Booting_ubuntu22.04_riscv64.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -45,20 +45,8 @@
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Jenkins Docs</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Building Jenkins</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#linux-kernel-version-distribution-and-release-at-the-time-of-build-process">Linux kernel version, distribution and release at the time of build process</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#cloning-the-github-repository">Cloning the github repository</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#resolving-the-dependencies">Resolving the dependencies</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#building-jenkins-using-maven-on-linux">Building Jenkins using maven on linux</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#executing-jenkins">Executing Jenkins</a>
-    </li>
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../Building_Jenkins_github_repo/">Building Jenkins</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Creating_Jenkins_Node_on_LXC/">Creating Jenkins Node on LXC</a>
                   </li>
@@ -79,7 +67,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Building_Linux_Kernel/">Building Linux kernel and booting on QEMU</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href="../Booting_ubuntu22.04_riscv64">Booting RISC-V Ubuntu 22.04 on qemu-system-riscv64</a>
+                  <li class="toctree-l1"><a class="" href=".">Booting RISC-V Ubuntu 22.04 on qemu-system-riscv64</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Cross-Compilation</span></p>
@@ -114,8 +102,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-          <li>Jenkins Docs &raquo;</li>
-      <li>Building Jenkins</li>
+      <li>Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64`</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -124,34 +111,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="building-github-repository-of-jenkins">Building Github Repository of Jenkins</h1>
-<h3 id="linux-kernel-version-distribution-and-release-at-the-time-of-build-process">Linux kernel version, distribution and release at the time of build process</h3>
-<p><strong>Linux Kernel</strong>: 5.15.0-46-generic (can be checked using <code>uname -r</code> in ubuntu)<br />
-<strong>Distribution</strong>: Ubuntu<br />
-<strong>Release</strong>: focal (20.04); also works without issue on ubuntu 22.04 (release can be checked using <code>lsb_release -a</code> in ubuntu)  </p>
-<h2 id="cloning-the-github-repository">Cloning the github repository</h2>
-<p>First clone the repository using the command below (here it is assumed to be cloned at user's home directory: ~/)<br />
-<code>git clone https://github.com/jenkinsci/jenkins.git</code>  </p>
-<h2 id="resolving-the-dependencies">Resolving the dependencies</h2>
-<p>After cloning the repository at ~/, the file <code>CONTRIBUTING.md</code> should be available in ~/jenkins/. This file contains all the information to resolve the dependencies and building the repository.
-Some notable dependencies are Java Development Kit (JDK), Apache Maven (latest version will be preferable) and git. Running Following command will resolve the mentioned dependencies.</p>
-<pre><code class="language-shell">sudo apt update &amp;&amp; sudo apt install default-jdk default-jre maven git -y
+                <h1 id="booting-risc-v-ubuntu-2204-on-qemu-system-riscv64">Booting RISC-V Ubuntu 22.04 on <code>qemu-system-riscv64</code></h1>
+<h2 id="pre-requisites">Pre-requisites</h2>
+<p>Following are the pre-requisites which are needed to be installed before booting ubuntu 22.04 for RISC-V on <code>qemu</code>.  </p>
+<p><em><strong>Note:</strong> Make sure RISC-V GNU Toolchain is installed before proceeding</em></p>
+<ol>
+<li>U-boot</li>
+<li>Qemu version 7.0 or greater with networking  </li>
+<li>Ubuntu 22.04 pre-built image for RISC-V</li>
+</ol>
+<h3 id="1-installing-u-boot">1. Installing U-boot</h3>
+<p><em><strong>Note:</strong> If you plan on installing U-boot from apt or some system repository, install the one which comes with ubuntu 22.04. Older will not work with this process. Also, be sure to checkout a latest Stable version instead of development version.</em>  </p>
+<ol>
+<li>Get source code of u-boot and checkout stable version using commands below.  </li>
+</ol>
+<pre><code class="language-shell">git clone https://github.com/qemu/u-boot.git
+cd u-boot
+git checkout v2022.10
 </code></pre>
-<h2 id="building-jenkins-using-maven-on-linux">Building Jenkins using maven on linux</h2>
-<p>For having the jenkins build up as fast as possible, following command can be used in ~/jenkins/.<br />
-<code>mvn -am -pl war,bom -Pquick-build clean install</code></p>
-<h2 id="executing-jenkins">Executing Jenkins</h2>
-<p>After the above commands successfully completes execution, <code>jenkins.war</code> should be present in <code>~/jenkins/war/target</code> and can be executed to run at port 8080 on localhost using following command.<br />
-<code>java -jar ~/jenkins/war/target/jenkins.war --httpPort=8080 #Considering jenkins repo is cloned at ~/</code></p>
-<p><strong>After this process jenkins UI can be accessed using <a href="http://localhost:8080">http://localhost:8080</a> in a browser and a password will be shown on terminal to login to jenkins first time</strong><br />
-After this, Jenkins UI will go through a very simple post installation process which one can configure according to his needs.  </p>
+<ol>
+<li>Generate configurations for supervisor mode with following command.  </li>
+</ol>
+<pre><code class="language-shell">make qemu-riscv64_smode_defconfig CROSS_COMPILE=riscv64-unknown-linux-gnu-
+</code></pre>
+<ol>
+<li>Execute following command to start build process.  </li>
+</ol>
+<pre><code class="language-shell">make CROSS_COMPILE=riscv64-unknown-linux-gnu-
+</code></pre>
+<ol>
+<li>This should install <code>u-boot.bin</code> in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as <code>$UBOOTPATH</code>.</li>
+</ol>
+<h3 id="2-installing-qemu">2. Installing Qemu</h3>
+<p>Qemu version 7.0 or greater should be installed with networking for ubuntu 22.04 to work. See <a href="../Building_qemu/">Installing Qemu for RISC-V</a> for instructions on installing <code>qemu-system-riscv64</code>.  </p>
+<h3 id="3-getting-ubuntu-2204-pre-build-image-for-risc-v">3. Getting Ubuntu 22.04 pre-build image for RISC-V</h3>
+<p>Ubuntu 22.04 image can be downloaded from <a href="https://ubuntu.com/download/risc-v">https://ubuntu.com/download/risc-v</a>.  </p>
+<h2 id="booting-ubuntu-2204-image-on-qemu">Booting Ubuntu 22.04 Image on qemu</h2>
+<p>In the directory where ubuntu 22.04 image is present, execute following command to boot into ubuntu 22.04 with <code>qemu-system-riscv64</code>.  </p>
+<p>If you need more space, you can use following command.  </p>
+<pre><code class="language-shell">qemu-img resize -f raw ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img +5G
+</code></pre>
+<p>This will increase storage size of the image by 5GB.  </p>
+<pre><code class="language-shell">qemu-system-riscv64 \
+-machine virt -nographic -m 2048 -smp 4 \
+-kernel $UBOOTPATH/u-boot.bin \
+-device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
+-drive file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
+</code></pre>
+<p>Here <code>-m</code> is the memory in Megabytes and <code>-smp</code> is number of cores. <code>-nographic</code> means qemu will use same terminal instance instead of opening a new window of its own (which is beneficial while running servers without gui).  </p>
+<p>This should boot ubuntu 22.04. But it will take a while on first start.  </p>
+<p>On start, credentials will be as follows.  </p>
+<pre><code class="language-shell">Username: ubuntu
+Password: ubuntu
+</code></pre>
+<p>After entering credentials, terminal will prompt for change of password after which ubuntu will be ready to use.</p>
               
             </div>
           </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Creating_Jenkins_Node_on_LXC/" class="btn btn-neutral float-right" title="Creating Jenkins Node on LXC">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
 
   <hr/>
 
@@ -173,10 +189,6 @@ After this, Jenkins UI will go through a very simple post installation process w
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../Creating_Jenkins_Node_on_LXC/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

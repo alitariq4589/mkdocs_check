@@ -4,7 +4,7 @@
 
 Openssl is a software library which is used inside many high level languages (e.g. Python, Ruby etc.) and also in linux itself. It is used for security and other cryptography applications.  
 
-## Building openssl for `riscv64` architecture
+## Building openssl v1.0.1 for `riscv64` architecture
 
 Following are the steps used to build openssl for riscv64 architecture.  
 
@@ -43,4 +43,47 @@ Here $RISCV_SYSROOT is the `sysroot/` folder located inside the riscv gnu toolch
 
 The above mentioned command will start the openssl console if everything went right.  
 
-**Note:** Do not change the directory of openssl or rename it, as it some files inside it are inferred with absolute paths, changing the directory or renaming it will cause other packages to not configure openssl for them when cross-compiling.
+**Note:** Do not change the directory of openssl or rename it, as it some files inside it are inferred with absolute paths, changing the directory or renaming it will cause other packages to not configure openssl for them when cross-compiling.  
+
+## Building openssl v1.1.1r for `riscv64` architecture  
+
+In openssl v1.1.1r, there is a support for `linux64-riscv64`. Following is the procedure for cross-compilation.  
+
+1. Checkout the `v1.1.1r` of openssl by executing following command in the repository directory.  
+
+```shell
+git checkout OpenSSL_1_1_1r
+```
+
+2. Execute following command to configure for riscv64 architecture and generate a `Makefile`.  
+
+```shell
+./Configure linux64-riscv64 --prefix=$PREFIX # Replace $PREFIX with where you want to install binaries
+```  
+
+3. Execute following command to cross-compile for `riscv64-unknown-linux-gnu`.  
+
+```shell
+make CROSS_COMPILE=riscv64-unknown-linux-gnu-
+```  
+
+4. Then install binaries at `$PREFIX` with following command.  
+
+```shell
+make install
+```  
+
+### Solving post-installation errors  
+
+On some operating systems, the installed binaries may not run properly and will give following error.  
+
+```
+./openssl: error while loading shared libraries: libssl.so.1.1: cannot open shared object file: No such file or directory
+```  
+This means that shared libraries cannot be found in the path where the system is looking for them. This can be solved by setting `LD_LIBRARY_PATH` variable as follows.  
+
+```shell
+export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
+```  
+
+It will be a good practice to include the above in the `bashrc` for debian users.

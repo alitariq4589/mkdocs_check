@@ -144,19 +144,16 @@
 </ol>
 <h2 id="installing-pre-requisites">Installing Pre-requisites</h2>
 <p>Execute the following command to install the pre-requisites for installing <code>qemu</code> on ubuntu 22.04 (jammy)  </p>
-<pre class="codehilite"><code>    sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+<pre><code>    sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 </code></pre>
-
 <p><code>qemu-slirp</code> is important for enabling user-level networking with <code>qemu-system-riscv64</code> <code>qemu-system-riscv64</code> while loading image of server installation of ubuntu. So it needs to be installed first.  </p>
 <p>Get the source code of <code>qemu-slirp</code> using following command:  </p>
-<pre class="codehilite"><code>    git clone https://github.com/openSUSE/qemu-slirp.git
+<pre><code>    git clone https://github.com/openSUSE/qemu-slirp.git
 </code></pre>
-
 <p>Then Execute following commands to install <code>slirp</code> in meson, which can later be used by qemu during build.  </p>
-<pre class="codehilite"><code>    meson build
+<pre><code>    meson build
     ninja -C build install
 </code></pre>
-
 <p><strong>Note:</strong> Make sure you have <code>riscv64-unknown-linux-gnu</code> toolchain installed for compiling program and executing them on qemu later.</p>
 <p>There are some optional dependencies which one can download, but they are actually not needed for installing qemu and make it work.</p>
 <h2 id="installing-qemu-system-riscv64">Installing <code>qemu-system-riscv64</code></h2>
@@ -166,37 +163,31 @@
 <ol>
 <li>
 <p>Get source code of <code>qemu</code> from github using the command below  </p>
-<pre class="codehilite"><code>git clone https://github.com/qemu/qemu.git
+<pre><code>git clone https://github.com/qemu/qemu.git
 </code></pre>
-
 </li>
 <li>
 <p>Configure qemu for <code>riscv64-softmmu</code> with following command (replace $PREFIX with valid location of installation).  </p>
-<pre class="codehilite"><code>./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp
+<pre><code>./configure --prefix=$PREFIX --target-list=riscv64-linux-user,riscv64-softmmu --enable-slirp
 </code></pre>
-
 </li>
 <li>
 <p>Execute following command to start the build.  </p>
-<pre class="codehilite"><code>make
+<pre><code>make
 </code></pre>
-
 </li>
 <li>
 <p>Execute following command to install the binaries at <code>$PREFIX</code> location.  </p>
-<pre class="codehilite"><code>make install
+<pre><code>make install
 </code></pre>
-
 </li>
 </ol>
 <p><em><strong>Note:</strong> After the installation with <code>slirp</code> following error can be encountered on some systems</em>  </p>
-<pre class="codehilite"><code>qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0
+<pre><code>qemu-system-riscv64: symbol lookup error: qemu-system-riscv64: undefined symbol: slirp_new, version SLIRP_4.0
 </code></pre>
-
 <p><em><strong>Solution:</strong> This can be solved by executing following command in source directory of qemu (which is cloned from github)</em>  </p>
-<pre class="codehilite"><code>    [sudo] ldconfig
+<pre><code>    [sudo] ldconfig
 </code></pre>
-
 <h3 id="testing-qemu-system-riscv64">Testing <code>qemu-system-riscv64</code></h3>
 <p><code>qemu-system-riscv64</code> can only be tested by booting a linux operating system. See <a href="../Booting_ubuntu22.04_riscv64/">Booting RISC-V Ubuntu 22.04 on <code>qemu-system-riscv64</code></a>.</p>
 <h2 id="installing-qemu-riscv64">Installing <code>qemu-riscv64</code></h2>
@@ -207,25 +198,21 @@ Throughout cross-compiling section, <code>qemu-riscv64</code> will be used with 
 <ol>
 <li>
 <p>Get source code of <code>qemu</code> using the command below  </p>
-<pre class="codehilite"><code>git clone https://github.com/qemu/qemu.git
+<pre><code>git clone https://github.com/qemu/qemu.git
 </code></pre>
-
 </li>
 <li>
 <p>Use following command in the root directory of repository to configure <code>qemu</code> for <code>riscv64-linux-user</code>  </p>
-<pre class="codehilite"><code>./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at
+<pre><code>./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at
 </code></pre>
-
 <p><strong>Note:</strong> If this is not your architecture/platform, you can see a list of available platform/architecture by executing following command</p>
-<pre class="codehilite"><code>./configure --help
+<pre><code>./configure --help
 </code></pre>
-
 </li>
 <li>
 <p>Use the following command to start the build process  </p>
-<pre class="codehilite"><code>make -j$(nproc)
+<pre><code>make -j$(nproc)
 </code></pre>
-
 </li>
 <li>
 <p>After the builld is complete without any error, use the following command to install binaries at <code>$PREFIX</code> location  </p>
@@ -242,30 +229,26 @@ Throughout cross-compiling section, <code>qemu-riscv64</code> will be used with 
 <ol>
 <li>
 <p>Create a C file in your favorite editor or by using the commands below:  </p>
-<pre class="codehilite"><code>echo &quot;#include&lt;stdio.h&gt;&quot; &gt; helloworld.c
-echo &quot;int main(){&quot; &gt;&gt; helloworld.c
-echo &quot;printf(&quot;Hello World !&quot;);&quot; &gt;&gt; helloworld.c
+<pre><code>echo "#include&lt;stdio.h&gt;" &gt; helloworld.c
+echo "int main(){" &gt;&gt; helloworld.c
+echo "printf("Hello World !");" &gt;&gt; helloworld.c
 echo '}' &gt;&gt; helloworld.c
 </code></pre>
-
 </li>
 <li>
 <p>Execute following command to compile C program with <code>riscv gnu toolchain</code>  </p>
-<pre class="codehilite"><code>riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
+<pre><code>riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
 </code></pre>
-
 </li>
 <li>
 <p>Execute following command to execute the compiled binary on <code>qemu-riscv64</code>  </p>
-<pre class="codehilite"><code>qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
+<pre><code>qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
 </code></pre>
-
 </li>
 <li>
 <p>If everything went right, following output will be shown.  </p>
-<pre class="codehilite"><code>Hello World !
+<pre><code>Hello World !
 </code></pre>
-
 </li>
 </ol>
               

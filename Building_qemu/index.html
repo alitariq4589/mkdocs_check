@@ -144,12 +144,12 @@
 </ol>
 <h2 id="installing-pre-requisites">Installing Pre-requisites</h2>
 <p>Execute the following command to install the pre-requisites for installing <code>qemu</code> on ubuntu 22.04 (jammy)  </p>
-<div class="codehilite"><pre><span></span>    sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
+<div class="codehilite"><pre><span></span>sudo apt-get install meson git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build
 </pre></div>
 
 <p><code>qemu-slirp</code> is important for enabling user-level networking with <code>qemu-system-riscv64</code> <code>qemu-system-riscv64</code> while loading image of server installation of ubuntu. So it needs to be installed first.  </p>
 <p>Get the source code of <code>qemu-slirp</code> using following command:  </p>
-<div class="codehilite"><pre><span></span>    git clone https://github.com/openSUSE/qemu-slirp.git
+<div class="codehilite"><pre><span></span>git clone https://github.com/openSUSE/qemu-slirp.git
 </pre></div>
 
 <p>Then Execute following commands to install <code>slirp</code> in meson, which can later be used by qemu during build.  </p>
@@ -205,12 +205,12 @@
 Throughout cross-compiling section, <code>qemu-riscv64</code> will be used with <code>linux-user</code> and executable of every program can be tested on qemu (e.g. python, ruby etc.).  </p>
 <h3 id="installing-qemu-riscv64-on-ubuntu-2204">Installing <code>qemu-riscv64</code> on ubuntu 22.04</h3>
 <ol>
-<li>
-<p>Get source code of <code>qemu</code> using the command below  </p>
+<li>Get source code of <code>qemu</code> using the command below  </li>
+</ol>
 <div class="codehilite"><pre><span></span>git clone https://github.com/qemu/qemu.git
 </pre></div>
 
-</li>
+<ol>
 <li>
 <p>Use following command in the root directory of repository to configure <code>qemu</code> for <code>riscv64-linux-user</code>  </p>
 <div class="codehilite"><pre><span></span>./configure --target-list=riscv64-linux-user --prefix=$PREFIX # Replace $PREFIX with a valid location to install at

@@ -226,20 +226,23 @@ Throughout cross-compiling section, <code>qemu-riscv64</code> will be used with 
 </ol>
 <h3 id="testing-qemu-riscv64">Testing <code>qemu-riscv64</code></h3>
 <ol>
-<li>Create a C file in your favorite editor or by using the commands below:  </li>
-</ol>
-<pre><code class="language-shell">echo &quot;#include&lt;stdio.h&gt;&quot; &gt; helloworld.c
-echo &quot;int main(){&quot; &gt;&gt; helloworld.c
-echo &quot;printf(&quot;Hello World !&quot;);&quot; &gt;&gt; helloworld.c
+<li>
+<p>Create a C file in your favorite editor or by using the commands below:  </p>
+<p>```shell</p>
+<p>echo "#include<stdio.h>" &gt; helloworld.c
+echo "int main(){" &gt;&gt; helloworld.c
+echo "printf("Hello World !");" &gt;&gt; helloworld.c
 echo '}' &gt;&gt; helloworld.c
-</code></pre>
-<ol>
-<li>Execute following command to compile C program with <code>riscv gnu toolchain</code>  </li>
-</ol>
-<pre><code class="language-shell">riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
-</code></pre>
-<ol>
-<li>Execute following command to execute the compiled binary on <code>qemu-riscv64</code>  </li>
+```  </p>
+</li>
+<li>
+<p>Execute following command to compile C program with <code>riscv gnu toolchain</code>  </p>
+<p><code>shell
+riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld</code>  </p>
+</li>
+<li>
+<p>Execute following command to execute the compiled binary on <code>qemu-riscv64</code>  </p>
+</li>
 </ol>
 <pre><code class="language-shell">qemu-riscv64 -L $RISCV_SYSROOT ./helloworld
 </code></pre>

@@ -23,5 +23,4 @@ nav:
     - Guide for Software Developer: Software_Developer_Guide.md
 theme: readthedocs
 markdown_extensions:
-  - codehilite:
-        guess_lang: False
+  - codehilite

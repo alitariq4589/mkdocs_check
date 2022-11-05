@@ -79,7 +79,7 @@ Throughout cross-compiling section, `qemu-riscv64` will be used with `linux-user
 
 ```shell
 git clone https://github.com/qemu/qemu.git
-```
+```  
 
 2. Use following command in the root directory of repository to configure `qemu` for `riscv64-linux-user`  
 

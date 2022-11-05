@@ -22,3 +22,6 @@ nav:
 - RISC-V CI User's Guide:
     - Guide for Software Developer: Software_Developer_Guide.md
 theme: readthedocs
+markdown_extensions:
+    - codehilite:
+        use_pygments: False

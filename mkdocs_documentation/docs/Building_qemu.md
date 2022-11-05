@@ -127,18 +127,19 @@ make install
 
 1. Create a C file in your favorite editor or by using the commands below:  
 
-```shell
-echo "#include<stdio.h>" > helloworld.c
-echo "int main(){" >> helloworld.c
-echo "printf("Hello World !");" >> helloworld.c
-echo '}' >> helloworld.c
-```  
+    ```shell
+
+    echo "#include<stdio.h>" > helloworld.c
+    echo "int main(){" >> helloworld.c
+    echo "printf("Hello World !");" >> helloworld.c
+    echo '}' >> helloworld.c
+    ```  
 
 2. Execute following command to compile C program with `riscv gnu toolchain`  
 
-```shell
-riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
-```  
+    ```shell
+    riscv64-unknown-linux-gnu-gcc helloworld.c -o helloworld
+    ```  
 
 3. Execute following command to execute the compiled binary on `qemu-riscv64`  
 

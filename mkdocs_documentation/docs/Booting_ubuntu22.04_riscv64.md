@@ -60,11 +60,11 @@ This will increase storage size of the image by 5GB.
 qemu-system-riscv64 \
 -machine virt -nographic -m 2048 -smp 4 \
 -kernel $UBOOTPATH/u-boot.bin \
--device virtio-net-device,netdev=eth0 -netdev user,id=eth0 \
+-device virtio-net-device,netdev=eth0 -netdev user,id=eth0,hostfwd=::2222-:22 \
 -drive file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
 ```  
 
-Here `-m` is the memory in Megabytes and `-smp` is number of cores. `-nographic` means qemu will use same terminal instance instead of opening a new window of its own (which is beneficial while running servers without gui).  
+Here `-m` is the memory in Megabytes and `-smp` is number of cores. `-nographic` means qemu will use same terminal instance instead of opening a new window of its own (which is beneficial while running servers without gui). Whereas `hostfwd=::2222-:22` will forward traffic going to port `2222` to port `22`. Due to this port `2222` will be used to access ssh on qemu machine.  
 
 This should boot ubuntu 22.04. But it will take a while on first start.  
 

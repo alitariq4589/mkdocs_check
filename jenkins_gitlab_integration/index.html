@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64` - RISC-V CI Docs</title>
+    <title>Integrating GitLab with Jenkins - RISC-V CI Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64`";
-        var mkdocs_page_input_path = "Booting_ubuntu22.04_riscv64.md";
+        var mkdocs_page_name = "Integrating GitLab with Jenkins";
+        var mkdocs_page_input_path = "jenkins_gitlab_integration.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -67,7 +67,7 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Building_Linux_Kernel/">Building Linux kernel and booting on QEMU</a>
                   </li>
-                  <li class="toctree-l1"><a class="" href=".">Booting RISC-V Ubuntu 22.04 on qemu-system-riscv64</a>
+                  <li class="toctree-l1"><a class="" href="../Booting_ubuntu22.04_riscv64">Booting RISC-V Ubuntu 22.04 on qemu-system-riscv64</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Cross-Compilation</span></p>
@@ -102,7 +102,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Booting RISC-V Ubuntu 22.04 on `qemu-system-riscv64`</li>
+      <li>Integrating GitLab with Jenkins</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -111,60 +111,65 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="booting-risc-v-ubuntu-2204-on-qemu-system-riscv64">Booting RISC-V Ubuntu 22.04 on <code>qemu-system-riscv64</code></h1>
+                <h1 id="integrating-gitlab-with-jenkins">Integrating GitLab with Jenkins</h1>
+<p>This documentation will cover how to create an integration between jenkins and GitLab. This will allow users to trigger jenkins job when a <code>merge request</code> or a <code>push</code> is detected in GitLab.  </p>
 <h2 id="pre-requisites">Pre-requisites</h2>
-<p>Following are the pre-requisites which are needed to be installed before booting ubuntu 22.04 for RISC-V on <code>qemu</code>.  </p>
-<p><em><strong>Note:</strong> Make sure RISC-V GNU Toolchain is installed before proceeding</em></p>
-<ol>
-<li>U-boot</li>
-<li>Qemu version 7.0 or greater with networking  </li>
-<li>Ubuntu 22.04 pre-built image for RISC-V</li>
-</ol>
-<h3 id="1-installing-u-boot">1. Installing U-boot</h3>
-<p><em><strong>Note:</strong> If you plan on installing U-boot from apt or some system repository, install the one which comes with ubuntu 22.04. Older will not work with this process. Also, be sure to checkout a latest Stable version instead of development version.</em>  </p>
 <ul>
-<li>Get source code of u-boot and checkout stable version using commands below.  </li>
+<li>GitLab plugin  </li>
+<li>Git plugin  </li>
+<li>GitLab repository with owner's credentials  </li>
 </ul>
-<pre><code class="language-shell">git clone https://github.com/qemu/u-boot.git
-cd u-boot
-git checkout v2022.10
-</code></pre>
+<h2 id="configuring-jenkins-system">Configuring Jenkins System</h2>
+<p>First jenkins needs to be configured.  </p>
 <ul>
-<li>Generate configurations for supervisor mode with following command.  </li>
+<li>Go to <code>Dashboard &gt; Manage Jenkins &gt; Configure System</code>  </li>
+<li>Scroll down to <code>Gitlab</code> section  </li>
+<li>
+<p>Check <code>Enable authentication for '/project' end-point</code>  </p>
+</li>
+<li>
+<p>Enter a <code>Connection name</code>.  </p>
+</li>
+<li>Enter <code>Gitlab host URL</code> as <code>https://gitlab.com/</code>. In case there is a different domain name, then enter there instead of above url.  </li>
+<li>In <code>Credentials</code>, click on <code>Add</code> then click on <code>Jenkins</code>.  </li>
+<li>In <code>Kind</code>, select <code>GitLab API token</code>.  </li>
+<li>In <code>API token</code>, enter the gitlab personal access token (this will be obtained below while configuring GitLab).  </li>
+<li>Click on <code>Advanced</code>.</li>
+<li>Click on <code>Test Connection</code>.  </li>
+<li>If everything goes right, it should print <code>success</code>.  </li>
 </ul>
-<pre><code class="language-shell">make qemu-riscv64_smode_defconfig CROSS_COMPILE=riscv64-unknown-linux-gnu-
-</code></pre>
+<h2 id="configuring-gitlab">Configuring GitLab</h2>
 <ul>
-<li>Execute following command to start build process.  </li>
+<li>Click on profile avatar in the top right.  </li>
+<li>
+<p>Click on <code>Edit profile</code>.  </p>
+<p><img alt="GitLab Profile Settings" src="../docs/doc_images/GitLab_profile_settings.png" /></p>
+</li>
+<li>
+<p>Click on <code>Access Tokens</code>.</p>
+</li>
+<li>Create a new personal access token and copy it (this is the GitLab API token used in above section <code>Configuring Jenkins System</code>).  </li>
+<li>Go to repository settings.</li>
+<li>On left-side pane, select <code>Webhooks</code>.  </li>
+<li>Enter <code>GitLab webhook URL</code> (this is explained below in next section).  </li>
+<li>Enter <code>Secret Token</code> (this is explained in the below section).</li>
+<li>Check desirable trigger options.  </li>
+<li>Click <code>Add webhook</code>.</li>
 </ul>
-<pre><code class="language-shell">make CROSS_COMPILE=riscv64-unknown-linux-gnu-
-</code></pre>
+<h2 id="configuring-jenkins-job">Configuring Jenkins Job</h2>
 <ul>
-<li>This should install <code>u-boot.bin</code> in the source directory. This file will be used later so its path must be kept remember. Here it will be refered to as <code>$UBOOTPATH</code>.</li>
+<li>Create a jenkins job.</li>
+<li>On job configuration page, scroll down to <code>Source Code Management</code>.  </li>
+<li>Select <code>Git</code>.  </li>
+<li>In <code>Credentials</code>, add the owner credentials of GitLab repository. This will be <code>Username and Password</code>.  </li>
+<li>Select the appropriate branch (generally it is <code>main</code>).  </li>
+<li>Scroll down to <code>Build Triggers</code>.  </li>
+<li>Check <code>Build when a change is pushed to GitLab</code>. There will also be a <code>GitLab webhook URL</code>. This is needed in GitLab. This URL will be called as <code>Webhook URL</code>.  </li>
+<li>Click on <code>Advanced</code> in the same option, then scroll down and generate a secret token. This token is also needed. This token will be called as <code>Secret Token</code>.</li>
+<li>Scroll down to <code>Post-build Actions</code> and select <code>Publish build status to GitLab</code>.  </li>
+<li>Click on <code>Apply</code> and <code>Save</code>.  </li>
 </ul>
-<h3 id="2-installing-qemu">2. Installing Qemu</h3>
-<p>Qemu version 7.0 or greater should be installed with networking for ubuntu 22.04 to work. See <a href="../Building_qemu/">Installing Qemu for RISC-V</a> for instructions on installing <code>qemu-system-riscv64</code>.  </p>
-<h3 id="3-getting-ubuntu-2204-pre-build-image-for-risc-v">3. Getting Ubuntu 22.04 pre-build image for RISC-V</h3>
-<p>Ubuntu 22.04 image can be downloaded from <a href="https://ubuntu.com/download/risc-v">https://ubuntu.com/download/risc-v</a>.  </p>
-<h2 id="booting-ubuntu-2204-image-on-qemu">Booting Ubuntu 22.04 Image on qemu</h2>
-<p>In the directory where ubuntu 22.04 image is present, execute following command to boot into ubuntu 22.04 with <code>qemu-system-riscv64</code>.  </p>
-<p>If you need more space, you can use following command.  </p>
-<pre><code class="language-shell">qemu-img resize -f raw ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img +5G
-</code></pre>
-<p>This will increase storage size of the image by 5GB.  </p>
-<pre><code class="language-shell">qemu-system-riscv64 \
--machine virt -nographic -m 2048 -smp 4 \
--kernel $UBOOTPATH/u-boot.bin \
--device virtio-net-device,netdev=eth0 -netdev user,id=eth0,hostfwd=::2222-:22 \
--drive file=ubuntu-22.04.1-preinstalled-server-riscv64+unmatched.img,format=raw,if=virtio
-</code></pre>
-<p>Here <code>-m</code> is the memory in Megabytes and <code>-smp</code> is number of cores. <code>-nographic</code> means qemu will use same terminal instance instead of opening a new window of its own (which is beneficial while running servers without gui). Whereas <code>hostfwd=::2222-:22</code> will forward traffic going to port <code>2222</code> to port <code>22</code>. Due to this port <code>2222</code> will be used to access ssh on qemu machine.  </p>
-<p>This should boot ubuntu 22.04. But it will take a while on first start.  </p>
-<p>On start, credentials will be as follows.  </p>
-<pre><code class="language-shell">Username: ubuntu
-Password: ubuntu
-</code></pre>
-<p>After entering credentials, terminal will prompt for change of password after which ubuntu will be ready to use.</p>
+<p>Now whenever there will be a push (or whatever build trigger option is set in jenkins and gitlab webhook), specified jenkins job will be triggered.</p>
               
             </div>
           </div><footer>

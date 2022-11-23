@@ -10,7 +10,7 @@ nav:
     - Github Push webhook integration: jenkins_github_integration/Github_push_webhook.md
     - Github PR webhook integration: jenkins_github_integration/Github_PR_webhook_integration.md
     - GitLab Integration: jenkins_gitlab_integration.md
-    - Letsencrypt configuration with Jenkins: installing_ssl_certificates_new.md
+    - Letsencrypt configuration with Jenkins: Installing_ssl_certificates_new.md
 - QEMU and Linux Kernel:
     - Installing Qemu for RISC-V: Building_qemu.md
     - Building Linux kernel and booting on QEMU: Building_Linux_Kernel.md

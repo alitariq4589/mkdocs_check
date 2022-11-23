@@ -22,7 +22,7 @@ certbot certonly --standalone -d your.domain.name
 
 This will produce `cert.pem`, `fullchain.pem` and `privkey.pem`.  
 
-Copy these files to location where `.war` of jenkins is located. Make sure to change the permission from root to jenkins' user. After that, use following command to convert `cert.pem` to jenkins keystore format `.jks`  
+Copy these files to location where `.war` of jenkins is located. Make sure to change the permission from root to jenkins' user. After that, use following command to convert certificate files to `pkcs12` format.  
 
 ```shell
 openssl pkcs12 -inkey privkey.pem -in fullchain.pem -export -out keys.pkcs12

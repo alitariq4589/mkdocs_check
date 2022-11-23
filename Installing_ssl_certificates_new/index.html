@@ -139,7 +139,7 @@ keytool -importkeystore -srckeystore keys.pkcs12 -srcstoretype pkcs12 -destkeyst
 </code></pre>
 <p>This will ask for a password. Here it will be denoted as <code>&lt;password&gt;</code>.<br />
 Use following command to start jenkins server with generated SSL certificates.  </p>
-<pre><code class="language-shell">java -jar jenkins.war --httpPort=-1 --httpsPort=&lt;your_port&gt; --httpsKeyStore=jenkinsserver.jks --httpsKeyStorePassword=&lt;password&gt;
+<pre><code class="language-shell">java -jar jenkins.war --httpPort=-1 --httpsPort=&lt;your_port&gt; --httpsKeyStore=keystore --httpsKeyStorePassword=&lt;password&gt;
 </code></pre>
 <p>After this, go to browser and type <code>your.domain.name:&lt;your_port&gt;</code> to start jenkins with https protocol.</p>
               

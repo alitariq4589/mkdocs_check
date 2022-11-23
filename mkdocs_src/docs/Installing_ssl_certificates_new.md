@@ -34,7 +34,7 @@ This will ask for a password. Here it will be denoted as `<password>`.
 Use following command to start jenkins server with generated SSL certificates.  
 
 ```shell
-java -jar jenkins.war --httpPort=-1 --httpsPort=<your_port> --httpsKeyStore=jenkinsserver.jks --httpsKeyStorePassword=<password>
+java -jar jenkins.war --httpPort=-1 --httpsPort=<your_port> --httpsKeyStore=keystore --httpsKeyStorePassword=<password>
 ```  
 
 After this, go to browser and type `your.domain.name:<your_port>` to start jenkins with https protocol.

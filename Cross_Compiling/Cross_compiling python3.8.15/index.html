@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Overview - Cloud-V Docs</title>
+    <title>Cross Compiling Python3.8.15 - Cloud-V Docs</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Overview";
-        var mkdocs_page_input_path = "Cross_Compiling/Overview.md";
+        var mkdocs_page_name = "Cross Compiling Python3.8.15";
+        var mkdocs_page_input_path = "Cross_Compiling/Cross_compiling python3.8.15.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -76,15 +76,13 @@
               </ul>
               <p class="caption"><span class="caption-text">Cross-Compilation</span></p>
               <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../Overview/">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Cross Compiling Python3.8.15</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#need-of-cross-compilation">Need of Cross Compilation</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#basic-concept">Basic concept</a>
+    <li class="toctree-l2"><a class="reference internal" href="#building-python">Building Python</a>
     </li>
     </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Cross_compiling%20python3.8.15/">Cross Compiling Python3.8.15</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Cross_compiling_openssl/">Cross Compiling Openssl</a>
                   </li>
@@ -126,7 +124,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" alt="Docs"></a> &raquo;</li>
           <li>Cross-Compilation &raquo;</li>
-      <li>Overview</li>
+      <li>Cross Compiling Python3.8.15</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -135,25 +133,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="cross-compilation">Cross Compilation</h1>
-<h2 id="need-of-cross-compilation">Need of Cross Compilation</h2>
-<p>Lets say you have a computer <code>A</code> having processor with architecture <code>a</code> and another computer <code>B</code> having processor with architecture <code>b</code>. Assume computer <code>A</code> has all the necessary tools and softwares whereas computer <code>B</code> does not have any software, tools, compilers and also the dependencies needed to install these tools and softwares. In this scenario, you cannot download the software setups (say tarballs) directly on computer <code>B</code> and have them installed/compiled because they will not be able to get compiled by computer <code>B</code> and will be completely useless.</p>
-<h2 id="basic-concept">Basic concept</h2>
-<p>The basic workflow in such a condition will be as follows:  </p>
-<ol>
-<li>Install a compiler on computer <code>A</code> such that it runs on computer <code>A</code> and compiles code for architecture <code>a</code>.  </li>
-<li>Using the above installed compiler, install a compiler on computer <code>A</code> such that it runs on computer <code>A</code> but compiles code for architecture <code>b</code>. Such a compiler is called cross compiler. One example of such a cross-compiler is <a href="https://github.com/riscv-collab/riscv-gnu-toolchain">RISC-V GNU TOOLCHAIN</a>.  </li>
-<li>Using the above compiled cross compiler, compile all the programs and also the compiler itself for architecture <code>b</code>.</li>
-<li>Port all the compiled binaries to the computer <code>B</code>.</li>
-</ol>
-<p>Such a process is beneficial if you have created a custom architecture and there is no support available for it.<br />
-Throughout this documentation, the cross compiler used will be RISCV GNU Toolchain mentioned with <code>riscv64-unknown-linux-gcc</code> running on <code>x86_64</code> and compiling code for <code>riscv64</code> architecture whereas the native compiler will be <code>gcc</code> running on <code>x86_64</code> and compiling code for <code>x86_64</code> unless otherwise specified.  </p>
+                <h1 id="cross-compiling-python3815-for-riscv64">Cross compiling python3.8.15 for <code>riscv64</code></h1>
+<p>This document will include how to build python3.8.15 for riscv64 architecture while using build machine as x86_64.  </p>
+<h2 id="building-python">Building Python</h2>
+<p>Get the python source code of python 3.8.15 in form of tarball from <a href="https://www.python.org/downloads/source/">this</a> link.  </p>
+<p>Once a tarball is obtained, extract it and use following command in its root folder to configure it.  </p>
+<pre><code class="language-shell"># Here $PREFIX is the directory where the binaries are desired to be installed.
+./configure --host=riscv64-unknown-linux-gnu --build=x86_64-linux-gnu --prefix=&quot;$PREFIX&quot; --disable-ipv6 ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no
+</code></pre>
+<p>After the above command is executed, use following command to start the build.</p>
+<pre><code class="language-shell">make -j$(nproc)
+</code></pre>
+<p>Now to install binaries on the location where PREFIX, use following command.</p>
+<pre><code class="language-shell">make install
+</code></pre>
+<p>This will install binaries for python3.8.15 in the $PREFIX directory and it can be checked using <code>qemu-riscv64</code>.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../Building_Linux_Kernel/" class="btn btn-neutral float-left" title="Building Linux kernel and booting on QEMU"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Cross_compiling%20python3.8.15/" class="btn btn-neutral float-right" title="Cross Compiling Python3.8.15">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Overview/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Cross_compiling_openssl/" class="btn btn-neutral float-right" title="Cross Compiling Openssl">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -176,10 +176,10 @@ Throughout this documentation, the cross compiler used will be RISCV GNU Toolcha
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../Building_Linux_Kernel/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Cross_compiling%20python3.8.15/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../Cross_compiling_openssl/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

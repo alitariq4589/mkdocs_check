@@ -17,11 +17,16 @@ nav:
     - Booting RISC-V Ubuntu 22.04 on qemu-system-riscv64: Booting_ubuntu22.04_riscv64
 - Cross-Compilation:
     - Overview: Cross_Compiling/Overview.md
+    - Cross Compiling Python3.8.15: Cross_Compiling/Cross_compiling python3.8.15.md
     - Cross Compiling Openssl: Cross_Compiling/Cross_compiling_openssl.md
     - Cross Compiling Ruby: Cross_Compiling/Cross_compiling_ruby.md
     - Cross Compiling Drhystone: Cross_Compiling/Cross_compiling_dhrystone.md
     - Cross Compiling Coremark: Cross_Compiling/Cross_compiling_coremark
     - Cross Compiling Rust: Cross_Compiling/Cross_compiling_rust.md
+    - Cross Compiling go: Cross_Compiling/Cross_compiling_go.md
 - RISC-V CI User's Guide:
     - Guide for Software Developer: Software_Developer_Guide.md
+- Usage monitoring:
+    - Setting up Grafana and Prometheus: Usage_Monitoring/Prometheus_Grafana.md
+    - Integrating Prometheus with Grafana: Usage_Monitoring/Integrating_prometheus_grafana.md
 theme: readthedocs

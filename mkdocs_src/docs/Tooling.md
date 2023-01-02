@@ -11,7 +11,7 @@ Tools which are mentioned for `x86` architecture are able to run on`x86_runner2`
 | Tool | Version | Installed from | Host Architecture |
 | ---- | ------- | -------------- | ------------ |
 | RISC-V GNU Linux Toolchain | 12.2.0 | source | x86 |
-| Git | 2.3.0.2 | Source | x86 |
+| Git | 2.3.0.2 | source | x86 |
 | OpenJDK | 19.0.1 | apt | x86 |
 | GCC | 10.4.0 | apt | x86 |
 | Python3 | 3.8.15 | source | x86 |

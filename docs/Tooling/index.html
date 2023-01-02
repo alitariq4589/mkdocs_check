@@ -54,7 +54,11 @@
                 </li>
                 <li class="toctree-l2 current"><a class="reference internal current" href="./">Tools available in Cloud-V</a>
     <ul class="current">
-    <li class="toctree-l3"><a class="reference internal" href="#tools-on-x86_runner2-node">Tools on x86_runner2 node</a>
+    <li class="toctree-l3"><a class="reference internal" href="#tools-on-x86_runner1-and-qemuusermode_runner1-node">Tools on x86_runner1 and qemuusermode_runner1 node</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tools-on-riscv64_runner1-node">Tools on riscv64_runner1 node</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tools-on-hifive_unleashed-node">Tools on hifive_unleashed node</a>
     </li>
     </ul>
                 </li>
@@ -151,8 +155,9 @@
               
                 <h1 id="tools-on-cloud-v">Tools on Cloud-V</h1>
 <p>Following are the tools and libraries available in Cloud-V.</p>
-<h2 id="tools-on-x86_runner2-node">Tools on <code>x86_runner2</code> node</h2>
-<p>This section lists tools available on jenkins node named <code>x86_runner2</code>. Tools which are mentioned for RISC-V architecture can run on QEMU User mode.</p>
+<h2 id="tools-on-x86_runner1-and-qemuusermode_runner1-node">Tools on <code>x86_runner1</code> and <code>qemuusermode_runner1</code> node</h2>
+<p>Tools which are mentioned for <code>x86</code> architecture are able to run on<code>x86_runner2</code>. Tools which are mentioned for <code>RISC-V</code> architecture are able to run on <code>qemuusermode_runner1</code>.  </p>
+<p><strong>Operating System:</strong> Debian 11 (bullseye)</p>
 <table>
 <thead>
 <tr>
@@ -230,10 +235,204 @@
 <td>x86</td>
 </tr>
 <tr>
-<td>Rust</td>
-<td>1.25.1</td>
+<td>rustc</td>
+<td>1.65.0</td>
 <td>source</td>
 <td>RISC-V,x86</td>
+</tr>
+<tr>
+<td>Flex</td>
+<td>2.6.4</td>
+<td>apt</td>
+<td>x86</td>
+</tr>
+<tr>
+<td>Ninja</td>
+<td>1.10.1-1</td>
+<td>apt</td>
+<td>x86</td>
+</tr>
+<tr>
+<td>Bison</td>
+<td>3.7.5</td>
+<td>apt</td>
+<td>x86</td>
+</tr>
+<tr>
+<td>clang</td>
+<td>16.0.0</td>
+<td>source</td>
+<td>RISC-V</td>
+</tr>
+<tr>
+<td>autoconf</td>
+<td>2.69</td>
+<td>apt</td>
+<td>x86</td>
+</tr>
+<tr>
+<td>gperf</td>
+<td>2.2.4</td>
+<td>apt</td>
+<td>x86</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tools-on-riscv64_runner1-node">Tools on <code>riscv64_runner1</code> node</h2>
+<p>This is compute instance with 64-bit RISC-V Linux and it has all the packages ONLY for RISC-V architecture  </p>
+<p><strong>Operating System:</strong> Ubuntu 22.04.1 (jammy)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version</th>
+<th>Installed from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git</td>
+<td>2.34.1</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>OpenJDK</td>
+<td>19.0.1</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>GCC</td>
+<td>11.3.0</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Python3</td>
+<td>3.10.6</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>zlib</td>
+<td>1.2.11</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>OpenSSL</td>
+<td>3.0.2</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>3.0.2p107</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>1.18.8</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>rustc</td>
+<td>1.61.0</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Flex</td>
+<td>2.6.4</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Ninja</td>
+<td>1.10.1</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>Bison</td>
+<td>3.8.2</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>autoconf</td>
+<td>2.71</td>
+<td>apt</td>
+</tr>
+<tr>
+<td>gperf</td>
+<td>3.1</td>
+<td>apt</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tools-on-hifive_unleashed-node">Tools on <code>hifive_unleashed</code> node</h2>
+<p>This is compute instance is hifive unleased board and it has all the packages ONLY for RISC-V architecture.  </p>
+<p><strong>Operating System:</strong> Fedora 32 (Rawhide)</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version</th>
+<th>Installed from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git</td>
+<td>2.23.0</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>OpenJDK</td>
+<td>11</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>GCC</td>
+<td>9.2.1</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Python3</td>
+<td>3.8.1</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>OpenSSL</td>
+<td>1.1.1d</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Ruby</td>
+<td>2.5.1p57</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>1.12.2</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>rustc</td>
+<td>1.66.0</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Flex</td>
+<td>2.6.4</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Ninja</td>
+<td>1.9.0</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>Bison</td>
+<td>3.4.1</td>
+<td>dnf</td>
+</tr>
+<tr>
+<td>autoconf</td>
+<td>2.69</td>
+<td>dnf</td>
 </tr>
 </tbody>
 </table>

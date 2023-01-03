@@ -78,7 +78,7 @@ Webhook settings will look something like this:
 
 ### Configurations inside Cloud-V
 
-_**Note:** Currently users are not able to see or modify build configuration inside Jenkins, that is currently managed by administrator. Users are requested to inform administrator about how they want their repository configured._
+_**Note:** Currently users are not able to see or modify pipeline build configuration inside Jenkins, that is currently managed by administrator. Users are requested to inform administrator about how they want their pipeline configured._
 
 Cloud-V supports webhooks which can trigger the job from external sources such as GitHub. They work in a way such that, if a specified branch is committed or if a pull request is created, the specified job build starts running depending upon the trigger event which is set in build's configuration in Cloud-V.  
 

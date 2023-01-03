@@ -51,6 +51,10 @@ _**Note:** This jenkinsfile should remain same in all the branches and pull requ
 
 ## Setting credentials for webhook
 
+Cloud-V supports webhooks which can trigger the job from external sources such as GitHub. They work in a way such that, if a specified branch is committed or if a pull request is created, the specified job build starts running depending upon the trigger event which is set in build's configuration in Cloud-V.  
+
+This process requires GitHub credentials of owner of repository on which the webhook is to be set. These credentials can be safely added to Cloud-V without anyone (even administrator) seeing the passwords as follows.
+
 ### Configuration inside GitHub repository
 
 In GitHub,
@@ -79,10 +83,6 @@ Webhook settings will look something like this:
 ### Configurations inside Cloud-V
 
 _**Note:** Currently users are not able to see or modify pipeline build configuration inside Jenkins, that is currently managed by administrator. Users are requested to inform administrator about how they want their pipeline configured._
-
-Cloud-V supports webhooks which can trigger the job from external sources such as GitHub. They work in a way such that, if a specified branch is committed or if a pull request is created, the specified job build starts running depending upon the trigger event which is set in build's configuration in Cloud-V.  
-
-This process requires GitHub credentials of owner of repository on which the webhook is to be set. These credentials can be safely added to Cloud-V without anyone (even administrator) seeing the passwords as follows.
 
 - We will provide you with Cloud-V credentials on the provided email.
 - Login with provided credentials.

@@ -206,6 +206,8 @@ node{
 <p><img alt="Console Output" src="../doc_images/Console output for Hello World.png" /></p>
 <p><em><strong>Note:</strong> This jenkinsfile should remain same in all the branches and pull requests.</em>  </p>
 <h2 id="setting-credentials-for-webhook">Setting credentials for webhook</h2>
+<p>Cloud-V supports webhooks which can trigger the job from external sources such as GitHub. They work in a way such that, if a specified branch is committed or if a pull request is created, the specified job build starts running depending upon the trigger event which is set in build's configuration in Cloud-V.  </p>
+<p>This process requires GitHub credentials of owner of repository on which the webhook is to be set. These credentials can be safely added to Cloud-V without anyone (even administrator) seeing the passwords as follows.</p>
 <h3 id="configuration-inside-github-repository">Configuration inside GitHub repository</h3>
 <p>In GitHub,</p>
 <ul>
@@ -230,8 +232,6 @@ node{
 <p><img alt="webhook_settings" src="../doc_images/webhook_settings.png" />  </p>
 <h3 id="configurations-inside-cloud-v">Configurations inside Cloud-V</h3>
 <p><em><strong>Note:</strong> Currently users are not able to see or modify pipeline build configuration inside Jenkins, that is currently managed by administrator. Users are requested to inform administrator about how they want their pipeline configured.</em></p>
-<p>Cloud-V supports webhooks which can trigger the job from external sources such as GitHub. They work in a way such that, if a specified branch is committed or if a pull request is created, the specified job build starts running depending upon the trigger event which is set in build's configuration in Cloud-V.  </p>
-<p>This process requires GitHub credentials of owner of repository on which the webhook is to be set. These credentials can be safely added to Cloud-V without anyone (even administrator) seeing the passwords as follows.</p>
 <ul>
 <li>We will provide you with Cloud-V credentials on the provided email.</li>
 <li>Login with provided credentials.</li>

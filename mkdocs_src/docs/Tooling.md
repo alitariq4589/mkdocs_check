@@ -6,6 +6,14 @@ Following are the tools and libraries available in Cloud-V.
 
 Tools which are mentioned for `x86` architecture are able to run on`x86_runner2`. Tools which are mentioned for `RISC-V` architecture are able to run on `qemuusermode_runner1`.  
 
+The packages which are supported for `QEMU User mode` can be used with command below:  
+
+```shell
+qemu-riscv64 -L $RISCV_SYSROOT {PACKAGE_NAME}
+```  
+
+Here `PACKAGE_NAME` is the package which you want to run on QEMU user mode.
+
 **Operating System:** Debian 11 (bullseye)
 
 | Tool | Version | Installed from | Host Architecture |

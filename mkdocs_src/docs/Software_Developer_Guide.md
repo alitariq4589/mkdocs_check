@@ -99,7 +99,7 @@ In GitHub,
 
 Webhook settings will look something like this:
 
-![webhook_settings](../doc_images/../docs/doc_images/webhook-settings1.png)  
+![webhook_settings](<../doc_images/webhook-settings1.png>)  
 
 ### Configurations inside Cloud-V
 

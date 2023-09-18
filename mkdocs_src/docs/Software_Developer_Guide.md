@@ -57,7 +57,7 @@ From the left option bar in Settings scroll down and click on "Developer setting
 
 ![github settings3](../doc_images/github_repo_token3.png)
 
-Once there click on "Personal access tokens", then click on "Fine-grained tokens" from the dropdown list and after then click on "Generate new token".
+Once there, click on "Personal access tokens", then click on "Fine-grained tokens" from the dropdown list and after that click on "Generate new token".
 
 ![github settings4](../doc_images/github_repo_token4.png)
 

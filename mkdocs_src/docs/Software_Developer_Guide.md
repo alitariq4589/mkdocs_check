@@ -70,7 +70,7 @@ This will open the page for setting up new access token. Follow following steps 
 5. Under "Permissions" section, expand "Repository Permissions" and give the following two permissions:
 
      - "Read and write" access to "Commit statuses" (Because after the CI has run, Cloud-V will be able to set the status of the commit accordingly)
-     - "Read and write" access to "Webhooks" (Read permission for the webhook is required for reading the incoming the pull request. Write permission is required if you want Cloud-V to set the webhook for you instead of you going through the repository settings and setting it up)
+     - "Read and write" access to "Webhooks" (Read permission for the webhook is required for reading the incoming pull request. Write permission is required if you want Cloud-V to set the webhook for you instead of you going through the repository settings and setting it up)
 
 ***IMPORTANT NOTE:** If you have decided to create a webhook yourself or have already created one, then Cloud-V will not be able to manage the settings for you, proceed to [following](#configuring-repository-webhook-optional) section*
 

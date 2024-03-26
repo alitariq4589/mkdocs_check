@@ -1,6 +1,6 @@
-# Tools on `J-VM-1` or `J-QMU-1` node
+# Tools on `J-x86-1` or `J-QMU-1` node
 
-Tools which are mentioned for `x86` architecture are able to run on`J-VM-1`. Tools which are mentioned for `RISC-V` architecture are able to run on `J-QMU-1`.
+Tools which are mentioned for `x86` architecture are able to run on`J-x86-1`. Tools which are mentioned for `RISC-V` architecture are able to run on `J-QMU-1`.
 
 The packages which are supported for `QEMU User mode` can be used by normal commands once they are loaded.
 
@@ -9,9 +9,9 @@ Here `PACKAGE_NAME` is the package which you want to run on QEMU user mode.
 **Operating System:** Debian 11 (bullseye)  
 **QEMU User Mode Version:** Different Versions (see the table below)
 
-## Tooling available for `J-VM-1`
+## Tooling available for `J-x86-1`
 
-The tools available for `J-VM-1` is for use on x86 architecture and these tools do not support execution on RISC-V architecture
+The tools available for `J-x86-1` is for use on x86 architecture and these tools do not support execution on RISC-V architecture
 
 | Tool | Versions | Installed from | Host Architecture | Environment Modules Support |
 | ---- | ------- | -------------- | ------------ | ------------ |
@@ -73,4 +73,4 @@ Following table provides relevant information about version of the toolchain and
 | 02022024 | 13.2.0 | 8.2.1 |
 | 02022024 | 13.2.0 | 8.1.1 |
 
-***Note:** The `J-QMU-1` and `J-VM-1` are one and the same runner. The purpose of creating two separate executors for same hardware is that `J-VM-1` is supposed to be specifically for x86 architecture whereas `J-QMU-1` is specifically for the users who want to cross compile source code for riscv64 architecture and then use qemu-usermode to execute them. Nevertheless, the tooling available for `J-VM-1` can also be used for `J-QMU-1`*
+***Note:** The `J-QMU-1` and `J-x86-1` are one and the same runner. The purpose of creating two separate executors for same hardware is that `J-x86-1` is supposed to be specifically for x86 architecture whereas `J-QMU-1` is specifically for the users who want to cross compile source code for riscv64 architecture and then use qemu-usermode to execute them. Nevertheless, the tooling available for `J-x86-1` can also be used for `J-QMU-1`*

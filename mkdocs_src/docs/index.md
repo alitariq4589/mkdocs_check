@@ -1,7 +1,7 @@
 # Cloud-V Documentation
 
-On this site, you will find all the documentation regarding Jenkins, LXC containers and QEMU configured to use with Cloud-V CI infrastructure
+This documentation lists the tooling and necessary information to use Cloud-V for RISC-V application development on RISC-V compute instances provided by Cloud-V
 
-Documentation slides: [link](https://drive.google.com/file/d/1aBM3fvuGXYsrP2Ay__JQA9A98gfLmd8J/view?usp=share_link)
+Overview Slides: [link](http://ppt.cloud-v.co)
 
 Youtube Channel: [youtube.com/@Cloud-V](https://www.youtube.com/@Cloud-V)
